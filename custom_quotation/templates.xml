@@ -10,6 +10,7 @@
                 <field name="Destination"/>
 				<field name="DeliveryOrder" />
 				<field name="Vehicle" />
+                <field name="DeliveryDate" />
 		</xpath>
             </field>
         </record>
