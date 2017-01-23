@@ -97,51 +97,6 @@
             <div class="oe_structure"/>   
 
             </xpath>
-	    <!-- Finds the first table with as class table table-condensed and gives the ability to modify it
-		 This will replace everything withing tr (including tr)
-	    <xpath expr="//table[@class='table table-condensed']//thead//tr" position="replace">
-                    <tr style="background-color:lightgray;">
-                    	<th>No</th>
-                        <th class="text-middle">Banyaknya</th>
-                        <th>Nama Barang</th>
-                        <th class="text-right">Price</th>
-                        <th class="text-right">Jumlah</th>
-                    </tr>
-	    </xpath>
-
-	    <xpath expr="//tbody[@class='sale_tbody']" position="replace">
-	     <tr t-foreach="o.order_line" t-as="l">
-	     				<td><span t-esc="l_index+1"/></td>
-                        <td class="text-middle">
-                            <span t-field="l.product_uom_qty"/>
-                            <span groups="product.group_uom" t-field="l.product_uom"/>
-                        </td>
-                        <td>
-                           <span t-field="l.name"/>
-                        </td>
-                        <td class="text-right">
-                        Rp. <span t-field="l.price_unit"/>
-                        </td>
-                        <td class="text-right">
-                        Rp. <span t-field="l.price_subtotal"/>
-                        </td>
-                    </tr>
-	    </xpath>
-
-
-        <xpath expr="//div[@class='col-xs-4 pull-right']" position="replace">
-     <div class="col-xs-4 pull-right">
-        <table class="table table-condensed">
-                       <tr class="border-black">
-                            <td><strong>Total</strong></td>
-                            <td class="text-right">
-                              Rp. <span t-field="o.amount_total"/>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-        </xpath>
-	    -->
         </template>
     </data>
 </openerp>
