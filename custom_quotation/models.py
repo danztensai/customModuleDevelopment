@@ -9,6 +9,7 @@ class add_new_field(models.Model):
     Destination = fields.Char(string='Destination')
     DeliveryOrder = fields.Char(string='Delivery Order')
     Vehicle = fields.Many2one('fleet.vehicle','Vehicle')
-    DeliveryDate = fields.Date('Delivery Date');
+    DeliveryDate = fields.Date('Delivery Date')
+    DeliveryNumber = fields.Many2one('fleet.work.order','Delivery Order Number')
 
     

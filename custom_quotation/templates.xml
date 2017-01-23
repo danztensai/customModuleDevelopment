@@ -11,6 +11,7 @@
 				<field name="DeliveryOrder" />
 				<field name="Vehicle" />
                 <field name="DeliveryDate" />
+                <field name="DeliveryNumber" />
 		</xpath>
             </field>
         </record>
