@@ -1,0 +1,147 @@
+<openerp>
+    <data>
+        <!-- Inherit quotation report (from module sale) -->
+        <template id="report_quotation_inherit_demo" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//div[@class='page']" position="replace">
+             <div class="oe_structure"/>
+            <div class="row">
+               
+            </div>
+            <div class="row mt32 mb32" id="informations">
+               
+                <div t-if="o.date_order" class="col-xs-3">
+                    <strong t-if="o.state not in ['draft','sent']">Tanggal Order</strong>
+                    <p t-field="o.date_order"/>
+                </div>
+                <div t-if="o.user_id.name" class="col-xs-3">
+                    <strong>Kasir</strong>
+                    <p t-field="o.user_id.name"/>
+                </div>
+
+                <div class="col-xs-3">
+                 <Strong t-if="o.state not in ['draft','sent']">No Faktur</Strong>
+              
+                <p t-field="o.name"/>
+                </div>
+
+                <div class="col-xs-3">
+                <Strong> Nama Customer</Strong>
+                <p t-field="o.partner_invoice_id" 
+                        t-field-options='{"widget": "contact", "fields": ["name"], "no_marker": true}'/>
+                </div>
+                
+                 
+               
+            </div>
+
+            <table class="table table-condensed">
+                <thead>
+                    <tr style="background-color:lightgray;">
+                        <th>No</th>
+                        <th class="text-middle">Date</th>
+                        <th>Delivery Order Number</th>
+						<th>Destination</th>
+						<th>Vehicle</th>
+						<th>Quantity</th>
+						<th>Description</th>
+                        <th class="text-right">Price</th>
+                        <th class="text-right">Jumlah</th>
+                    </tr>
+               </thead>
+               <tbody class="sale_tbody">
+                    <tr t-foreach="o.order_line" t-as="l">
+                        <td><span t-esc="l_index+1"/></td>
+						<td><span t-field="l.DeliveryDate"/></td>
+						<td><span t-field="l.DeliveryNumber"/></td>
+						<td><span t-field="l.Destination"/></td>
+						<td><span t-field="l.Vehicle"/></td>
+						
+                        <td class="text-middle">
+                            <span t-field="l.product_uom_qty"/>
+                            <span groups="product.group_uom" t-field="l.product_uom"/>
+                        </td>
+                        <td>
+                           <span t-field="l.name"/>
+                        </td>
+                        <td class="text-right">
+                        <span t-field="l.price_unit" t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                        </td>
+                        <td class="text-right">
+                        <span t-field="l.price_subtotal" t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-xs-6 col-md-10">Tanda Terima
+                    <br/><br/><br/>
+                (-----------------------------------------)
+                </div>
+               <div class="col-xs-4 pull-right">
+        <table class="table table-condensed">
+                       <tr class="border-black">
+                            <td><strong>Total</strong></td>
+                            <td class="text-right">
+                              <span t-field="o.amount_total" t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <p t-field="o.note" />
+            <p t-if="o.payment_term.note">
+                <strong>Payment Term:</strong>
+                <span t-field="o.payment_term.note"/>
+            </p>
+            <div class="oe_structure"/>   
+
+            </xpath>
+	    <!-- Finds the first table with as class table table-condensed and gives the ability to modify it
+		 This will replace everything withing tr (including tr)
+	    <xpath expr="//table[@class='table table-condensed']//thead//tr" position="replace">
+                    <tr style="background-color:lightgray;">
+                    	<th>No</th>
+                        <th class="text-middle">Banyaknya</th>
+                        <th>Nama Barang</th>
+                        <th class="text-right">Price</th>
+                        <th class="text-right">Jumlah</th>
+                    </tr>
+	    </xpath>
+
+	    <xpath expr="//tbody[@class='sale_tbody']" position="replace">
+	     <tr t-foreach="o.order_line" t-as="l">
+	     				<td><span t-esc="l_index+1"/></td>
+                        <td class="text-middle">
+                            <span t-field="l.product_uom_qty"/>
+                            <span groups="product.group_uom" t-field="l.product_uom"/>
+                        </td>
+                        <td>
+                           <span t-field="l.name"/>
+                        </td>
+                        <td class="text-right">
+                        Rp. <span t-field="l.price_unit"/>
+                        </td>
+                        <td class="text-right">
+                        Rp. <span t-field="l.price_subtotal"/>
+                        </td>
+                    </tr>
+	    </xpath>
+
+
+        <xpath expr="//div[@class='col-xs-4 pull-right']" position="replace">
+     <div class="col-xs-4 pull-right">
+        <table class="table table-condensed">
+                       <tr class="border-black">
+                            <td><strong>Total</strong></td>
+                            <td class="text-right">
+                              Rp. <span t-field="o.amount_total"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+        </xpath>
+	    -->
+        </template>
+    </data>
+</openerp>
