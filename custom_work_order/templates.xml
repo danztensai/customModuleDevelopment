@@ -26,7 +26,7 @@
 						<field name="DepartFromDestination"/>
 					</group>
 				</xpath>	
-				
+				<!--
 				<xpath expr="//tree[@string='Routes']//field[@name='name']" position="after">
 					<field name="Arrival" />
 					<field name="ArrivalPlan" />
@@ -38,7 +38,7 @@
 					
 					
 				</xpath>
-				
+				-->
 			
 		     </field>
         </record>
