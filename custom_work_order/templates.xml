@@ -5,7 +5,7 @@
             <field name="model">fleet.work.order</field>
             <field name="inherit_id" ref="fleet_work_order.fleet_work_order_view_form"/>
             <field name="arch" type="xml">
-		        <xpath expr="//group[@name='group_route_2']" position="after">
+		        <xpath expr="//group[@name='group_route_1']" position="after">
 					<group name="group_route_3" colspan="4" col="4">
                       	<field name="Status"/>
 						<field name="Remark"/>
