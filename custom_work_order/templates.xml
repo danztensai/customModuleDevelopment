@@ -5,25 +5,39 @@
             <field name="model">fleet.work.order</field>
             <field name="inherit_id" ref="fleet_work_order.fleet_work_order_view_form"/>
             <field name="arch" type="xml">
+				<xpath expr="//group[@name='group_route_1']//field[@name='distance']" position="after">
+				<field name="Status"/>	
+				</xpath>
 		        <xpath expr="//group[@name='group_route_1']" position="after">
+				<group name="group_route_4_status" colspan="2" col="2" attrs="{'invisible':[('multiple_route','=',False)]}">
+				<field name="Status"/>
+				</group>
 					<group name="group_route_3" colspan="4" col="4">
-                      	<field name="Status"/>
-						<field name="Remark"/>
-						<field name="LoadingPlan" />
+            			<field name="LoadingPlan" />
 						<field name="ArrivalPlan"/>
 						<field name="SPM"/>
+						<field name="ActualArrivalTime"/>
 						<field name="StartLoading"/>
-						<field name="FinishLoading"/>
+					<field name="FinishDocLoading"/>					
+					<field name="FinishLoading"/>
+						<field name="StartUnloading"/>
 						<field name="LoadingDocFinish"/>
 						<field name="DispatchFromOrigin"/>
-						<field name="ActualArrivalTime"/>
-						<field name="StartUnloading"/>
-						<field name="FinishDocLoading"/>
 						<field name="DepartFromDestination"/>
 					</group>
-				
+				</xpath>	
+				<xpath expr="//tree[@string='Routes']//field[@name='name']" position="after">
+					<field name="Arrival" />
+					<field name="ArrivalPlan" />
+					<field name="StartUnloading" />
+					<field name="FinishUnloading" />
+					<field name="FinishUnloadingDoc" />
+					<field name="DepartFromDestination" />
+					
+					
 				</xpath>
-            </field>
+			
+		     </field>
         </record>
     </data>
 </openerp>

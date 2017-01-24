@@ -34,12 +34,12 @@ Remark
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['fleet_work_order'],
+    'depends': ['fleet_work_order','fleet_work_order_multiple_route'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'templates.xml',
+        'templates.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

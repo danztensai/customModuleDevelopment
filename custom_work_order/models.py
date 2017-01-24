@@ -19,6 +19,16 @@ class add_new_field(models.Model):
     FinishUnloading = fields.Date('Finish Unloading')
     FinishDocLoading = fields.Date('Finish Doc Loading')
     DepartFromDestination = fields.Date('Depart From Destination')
-    Status = fields.Char(string='Status')
-    Remark = fields.Char(string='Remark')
-    
+    Status = fields.Selection(selection=[('pod','POD'),('halfpod','Half POD'),('cancelled','CANCELLED')],String='Status')
+
+class add_new_field_multiroute(models.Model):
+
+    _inherit = 'fleet.route'
+
+    Arrival = fields.Date('Arrival')
+    ArrivalPlan = fields.Date('Arrival Plan')
+    StartUnloading = fields.Date('Start Unloading')
+    FinishUnloading = fields.Date('Finish Unloading')
+    FinishUnloadingDoc = fields.Date('Finish Unloading Doc')
+    DepartFromDestination = fields.Date('Depart From Dest')
+
