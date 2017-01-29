@@ -6,20 +6,6 @@
             <field name="inherit_id" ref="fleet_work_order.fleet_work_order_view_form"/>
             <field name="arch" type="xml">
 			
-				<xpath expr="//form[@string='Fleet Work Order']//header" position="replace">
-					<header>
-				<button name="button_confirm" string="Confirm" type="object" class="oe_highlight" states="draft"/>
-                <button name="button_loading" string="Loading" type="object" class="oe_highlight" states="confirmed"/>
-				<button name="128" string="Depart" type="action" class="oe_highlight" states="loading"/>
-                <button name="129" string="Arrive" type="action" class="oe_highlight" states="depart"/>                
-                <button name="button_unloading" string="Unloading" type="object" class="oe_highlight" states="arrive"/>
-				<button name="button_finish" string="Finish" type="object" class="oe_highlight" states="unloading"/>
-				<button name="button_exception" string="Exception" type="object" class="oe_highlight" states="finish"/>
-				<button name="button_cancel" string="Cancel" type="object" states="draft,confirmed,loading,depart,arrive,unloading,finish,exception,cancelled"/>
-                <button name="button_restart" string="Set To Draft" type="object" states="cancelled"/>                                
-                <field name="state" widget="statusbar"/>
-				</header>
-				</xpath>
 		    
 			
 				<xpath expr="//group[@name='group_route_1']//field[@name='distance']" position="after">
