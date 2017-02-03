@@ -128,21 +128,9 @@ class add_new_field(models.Model):
                                              ending_odometer))
 
     @api.multi
-    def _action_cancel(self):
-        self.ensure_one()
-        self.write(self._prepare_cancel_data())
-
-    @api.multi
     def _action_restart(self):
         self.ensure_one()
         self.write(self._prepare_restart_data())
-
-    @api.model
-    def create(self, vals):
-        if vals.get('name', '/') == '/':
-            vals['name'] = self.env['ir.sequence'].next_by_code(
-                'fleet.work.order') or '/'
-        return super(FleetWorkOrder, self).create(vals)
 
     @api.multi
     def _prepare_confirm_data(self):

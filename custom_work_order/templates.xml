@@ -21,12 +21,17 @@
 				</header>
 				</xpath>
 		    
-			
+			<!--
 				<xpath expr="//group[@name='group_route_1']//field[@name='distance']" position="after">
-				<field name="Status"/>	
+				
+				<group name="group_route_4_status" colspan="2" col="2" >
+				<field name="Status"/>
+				</group>	
 				</xpath>
+				-->
 		        <xpath expr="//group[@name='group_route_1']" position="after">
-				<group name="group_route_4_status" colspan="2" col="2" attrs="{'invisible':[('multiple_route','=',False)]}">
+				<!-- <group name="group_route_4_status" colspan="2" col="2" attrs="{'invisible':[('multiple_route','=',False)]}"> -->
+				<group name="group_route_4_status" colspan="2" col="2" >
 				<field name="Status"/>
 				</group>
 					<group name="group_route_3" colspan="4" col="4">
