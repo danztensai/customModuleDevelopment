@@ -1,8 +1,8 @@
 {
-    'name': "custom Workorder",
+    'name': "Custom Work Order",
 
     'summary': """
-        Custom workorder with custom field""",
+        Custom Work Order with custom field""",
 
     'description': """
 Add New field :

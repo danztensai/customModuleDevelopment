@@ -29,6 +29,16 @@
 				</group>	
 				</xpath>
 				-->
+				<xpath expr="//group[@name='group_1']//field[@name='partner_id']" position="after">
+				<field name="DestinationCode" />
+				<field name="WeightVehicles" />
+				<field name="VolumeVehicles" />
+				</xpath>
+				<xpath expr="//group[@name='group_1']//field[@name='vehicle_id']" position="after">
+				<field name="Location" options="{'always_reload':True}" />
+				<field name="WeightVehiclesRelated"  /> Kg
+				<field name="VolumeVehiclesRelated" /> m³ 
+				</xpath>
 		        <xpath expr="//group[@name='group_route_1']" position="after">
 				<!-- <group name="group_route_4_status" colspan="2" col="2" attrs="{'invisible':[('multiple_route','=',False)]}"> -->
 				<group name="group_route_4_status" colspan="2" col="2" >
@@ -63,5 +73,40 @@
 			
 		     </field>
         </record>
+		
+		<record id="fleet_vehicle_form_inherit" model="ir.ui.view">
+            <field name="name">fleet.vehicle.form.inherit</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_form"/>
+			<field name="arch" type="xml">
+			
+				<xpath expr="//group[@string='Additional Properties']//field[@name='color']" position="after">
+					<field name="Quantity" />
+					<field name="VolumeVehicles" />
+					<field name="WeightVehicles" />
+					<field name="GPSLongtitudeLocation" />
+					<field name="GPSLatitudeLocation" />
+					<field name="Location" />
+					
+				</xpath>
+			  
+			  </field>
+		</record>
+		
+		
+		<record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+			
+				<xpath expr="//field[@name='parent_id']" position="after">
+					<field name="DestinationCode" placeholder="Destination Code"/>
+				</xpath>
+			  
+			  </field>
+		</record>
+		
+		
     </data>
 </openerp>

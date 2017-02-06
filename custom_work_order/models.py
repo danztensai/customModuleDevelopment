@@ -18,6 +18,34 @@ class add_new_field(models.Model):
     FinishDocLoading = fields.Date('Finish Doc Loading')
     DepartFromDestination = fields.Date('Depart From Destination')
     Status = fields.Selection(selection=[('pod','POD'),('halfpod','Half POD'),('cancelled','CANCELLED')],String='Status')
+    partner_id = fields.Many2one(
+        string="Partner",
+        comodel_name="res.partner",
+        domain="[('customer','=',True)]",
+        readonly=True,
+        states={
+            'draft': [('readonly', False)],
+        },
+    )
+    DestinationCode = fields.Char(related='partner_id.DestinationCode',string='Destination Code')
+    vehicle_id = fields.Many2one(
+        string="Vehicle",
+        comodel_name="fleet.vehicle",
+        required=False,
+        readonly=True,
+        states={
+            'draft': [('readonly', False)],
+            'confirmed': [('readonly', False)],
+            'depart': [('required', True)],
+        },
+    )
+
+    VolumeVehicles = fields.Integer('Volume Vehicles',store=True)
+    WeightVehicles = fields.Integer('Weight Vehicles',store=True)
+
+    Location = fields.Char(related='vehicle_id.Location',string='Current Location')
+    WeightVehiclesRelated = fields.Integer(related='vehicle_id.WeightVehicles')
+    VolumeVehiclesRelated = fields.Integer(related='vehicle_id.VolumeVehicles')
 
     state = fields.Selection(selection=[ ("draft", "Draft"),
             ("confirmed", "Confirmed"),
@@ -28,6 +56,12 @@ class add_new_field(models.Model):
             ("finish","Finish"),
             ("exception","Exception"),
             ("cancelled", "Cancelled")])
+    @api.onchange(WeightVehicles)
+    def check_weight(self):
+        if self.WeightVehicles > self.WeightVehiclesRelated:
+            return  {'warning': {'title': "Warning", 'message': "What is this?"}}
+
+
 
     @api.one
     def button_loading(self):
@@ -181,4 +215,21 @@ class add_new_field_multiroute(models.Model):
     FinishUnloading = fields.Date('Finish Unloading')
     FinishUnloadingDoc = fields.Date('Finish Unloading Doc')
     DepartFromDestination = fields.Date('Depart From Dest')
+
+class add_new_field_vehicles(models.Model):
+
+    _inherit ='fleet.vehicle'
+
+    VolumeVehicles = fields.Integer('Max Volume Vehicles')
+    WeightVehicles = fields.Integer('Max Weight Vehicles')
+    GPSLongtitudeLocation = fields.Float('Longtitude')
+    GPSLatitudeLocation = fields.Float('Latitude')
+    Location = fields.Char('Location')
+    Quantity = fields.Char('Quaintity')
+
+class add_new_field_customer(models.Model):
+
+    _inherit ='res.partner'
+
+    DestinationCode = fields.Char('Destination Code')
 
