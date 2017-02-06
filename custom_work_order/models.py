@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from openerp import models, fields, api
 
 class add_new_field(models.Model):
@@ -40,8 +41,8 @@ class add_new_field(models.Model):
         },
     )
 
-    VolumeVehicles = fields.Integer('Volume Vehicles',store=True)
-    WeightVehicles = fields.Integer('Weight Vehicles',store=True)
+    VolumeVehicles = fields.Integer('Volume Vehicles  m³',store=True)
+    WeightVehicles = fields.Integer('Weight Vehicles  Kg',store=True)
 
     Location = fields.Char(related='vehicle_id.Location',string='Current Location')
     WeightVehiclesRelated = fields.Integer(related='vehicle_id.WeightVehicles')
@@ -56,11 +57,34 @@ class add_new_field(models.Model):
             ("finish","Finish"),
             ("exception","Exception"),
             ("cancelled", "Cancelled")])
-    @api.onchange(WeightVehicles)
-    def check_weight(self):
-        if self.WeightVehicles > self.WeightVehiclesRelated:
-            return  {'warning': {'title': "Warning", 'message': "What is this?"}}
 
+
+    
+    def on_change_weight(self,cr,user,ids,WeightVehicles,WeightVehiclesRelated,context=None):
+        #Calculate the total
+        res={}
+
+        if WeightVehicles > WeightVehiclesRelated:
+        
+            res = {
+               'warning': {'title': 'Error!', 'message': 'Something went wrong! Please check your data, Its Overweight \n \n Please Pick Another Vehicle '}
+              }
+        
+        #Return the values to update it in the view.
+        return res
+
+    def on_change_volume(self,cr,user,ids,VolumeVehicles,VolumeVehiclesRelated,context=None):
+        #Calculate the total
+        res={}
+
+        if VolumeVehicles > VolumeVehiclesRelated:
+        
+            res = {
+               'warning': {'title': 'Error!', 'message': 'Something went wrong! Please check your data, Its over Capacity \n Please Pick Another Vehicle '}
+              }
+        
+        #Return the values to update it in the view.
+        return res
 
 
     @api.one
@@ -220,8 +244,8 @@ class add_new_field_vehicles(models.Model):
 
     _inherit ='fleet.vehicle'
 
-    VolumeVehicles = fields.Integer('Max Volume Vehicles')
-    WeightVehicles = fields.Integer('Max Weight Vehicles')
+    VolumeVehicles = fields.Integer('Max Volume Vehicles m³')
+    WeightVehicles = fields.Integer('Max Weight Vehicles Kg')
     GPSLongtitudeLocation = fields.Float('Longtitude')
     GPSLatitudeLocation = fields.Float('Latitude')
     Location = fields.Char('Location')
