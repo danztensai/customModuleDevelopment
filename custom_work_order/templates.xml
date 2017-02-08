@@ -33,11 +33,12 @@
 				<field name="DestinationCode" />
 				<field name="WeightVehicles" on_change="on_change_weight(WeightVehicles,WeightVehiclesRelated)" />
 				<field name="VolumeVehicles"  />
+				 <field name="attachment_ids" widget="many2many_binary" string="Attach a file"/>
 				</xpath>
 				<xpath expr="//group[@name='group_1']//field[@name='vehicle_id']" position="after">
 				<field name="Location" options="{'always_reload':True}" />
 				<field name="WeightVehiclesRelated" readonly="1" /> Kg
-				<field name="VolumeVehiclesRelated" readonly="1"/> m³ 
+				<field name="VolumeVehiclesRelated" readonly="1"/> m³
 				</xpath>
 		        <xpath expr="//group[@name='group_route_1']" position="after">
 				<!-- <group name="group_route_4_status" colspan="2" col="2" attrs="{'invisible':[('multiple_route','=',False)]}"> -->

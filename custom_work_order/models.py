@@ -28,6 +28,10 @@ class add_new_field(models.Model):
             'draft': [('readonly', False)],
         },
     )
+
+    attachment_ids = fields.Many2many('ir.attachment','fleet_work_order_attachment','fleet_work_order_id_attachment',string='Attachment')
+    
+
     DestinationCode = fields.Char(related='partner_id.DestinationCode',string='Destination Code')
     vehicle_id = fields.Many2one(
         string="Vehicle",
@@ -58,6 +62,7 @@ class add_new_field(models.Model):
             ("exception","Exception"),
             ("cancelled", "Cancelled")])
 
+    Image = fields.Binary("Image",help="Insert Attachment Here")
 
     
     def on_change_weight(self,cr,user,ids,WeightVehicles,WeightVehiclesRelated,context=None):
