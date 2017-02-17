@@ -13,7 +13,7 @@ class add_new_field(models.Model):
     FinishLoading = fields.Date('Finish Loading')
     LoadingDocFinish = fields.Date('Doc Finish')
     DispatchFromOrigin = fields.Date('Dispatch From Origin')
-    ActualArrivalTime = fields.Date('Actual Arrival Time')
+    ActualArrivalTime = fields.Date('Arrival at Destination')
     StartUnloading = fields.Date('Start Unloading')
     FinishUnloading = fields.Date('Finish Unloading')
     FinishDocLoading = fields.Date('Finish Doc Loading')
