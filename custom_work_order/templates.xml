@@ -46,23 +46,24 @@
 				<!-- <group name="group_route_4_status" colspan="2" col="2" attrs="{'invisible':[('multiple_route','=',False)]}"> -->
 				<group name="group_route_4_status" colspan="2" col="2" >
 				<field name="Status"/>
+			
 				</group>
-					<group name="group_route_3" colspan="4" col="4">
-            			<field name="LoadingPlan" />
-						
+					<group name="group_route_3">
+            		<field name="LoadingPlan" />
 						<field name="SPM"/>
-						<field name="ActualArrivalTime"/>
+			
 						<field name="StartLoading"/>
-									
-					<field name="FinishLoading"/>
-						<field name="StartUnloading"/>
+						<field name="FinishLoading"/>					
 						<field name="LoadingDocFinish"/>
 						<field name="DispatchFromOrigin"/>
+						<field name="ActualArrivalTime"/>
+						<field name="StartUnloading"/>
 						<field name="DepartFromDestination"/>
+				
 					</group>
 				</xpath>	
 				
-				
+			<!--Bagian awal untuk di comment pada saat diserver -->	
 				<xpath expr="//tree[@string='Routes']//field[@name='name']" position="after">
 					<field name="Arrival" />
 					<field name="ArrivalPlan" />
@@ -72,7 +73,7 @@
 					<field name="FinishUnloadingDoc" />
 				</xpath>
 				
-				
+				<!--Bagian Akhir -->
 			
 		     </field>
         </record>

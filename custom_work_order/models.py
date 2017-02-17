@@ -11,7 +11,7 @@ class add_new_field(models.Model):
     SPM = fields.Date('SPM')
     StartLoading = fields.Date('Start Loading')
     FinishLoading = fields.Date('Finish Loading')
-    LoadingDocFinish = fields.Date('Loading Doc Finish')
+    LoadingDocFinish = fields.Date('Doc Finish')
     DispatchFromOrigin = fields.Date('Dispatch From Origin')
     ActualArrivalTime = fields.Date('Actual Arrival Time')
     StartUnloading = fields.Date('Start Unloading')
