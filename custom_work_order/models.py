@@ -47,6 +47,7 @@ class add_new_field(models.Model):
 
     VolumeVehicles = fields.Integer('Volume Vehicles  m³',store=True)
     WeightVehicles = fields.Integer('Weight Vehicles  Kg',store=True)
+    licensePlate = fields.Char('License Plate')
 
     Location = fields.Char(related='vehicle_id.Location',string='Current Location')
     WeightVehiclesRelated = fields.Integer(related='vehicle_id.WeightVehicles')

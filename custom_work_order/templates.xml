@@ -38,6 +38,7 @@
 				 <field name="attachment_ids" widget="many2many_binary" string="Attach a file"/>
 				</xpath>
 				<xpath expr="//group[@name='group_1']//field[@name='vehicle_id']" position="after">
+				<field name="licensePlate" />
 				<field name="Location" options="{'always_reload':True}" />
 				<field name="WeightVehiclesRelated" readonly="1" /> Kg
 				<field name="VolumeVehiclesRelated" readonly="1"/> m³
