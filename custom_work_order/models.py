@@ -6,18 +6,18 @@ class add_new_field(models.Model):
     _inherit = 'fleet.work.order'
     
    
-    LoadingPlan = fields.Date('Loading Plan')
-    ArrivalPlan = fields.Date('Arrival Plan')
-    SPM = fields.Date('SPM')
-    StartLoading = fields.Date('Start Loading')
-    FinishLoading = fields.Date('Finish Loading')
-    LoadingDocFinish = fields.Date('Doc Finish')
-    DispatchFromOrigin = fields.Date('Dispatch From Origin')
-    ActualArrivalTime = fields.Date('Arrival at Destination')
-    StartUnloading = fields.Date('Start Unloading')
-    FinishUnloading = fields.Date('Finish Unloading')
-    FinishDocLoading = fields.Date('Finish Doc Loading')
-    DepartFromDestination = fields.Date('Depart From Destination')
+    LoadingPlan = fields.Datetime('Loading Plan')
+    ArrivalPlan = fields.Datetime('Arrival Plan')
+    SPM = fields.Datetime('SPM')
+    StartLoading = fields.Datetime('Start Loading')
+    FinishLoading = fields.Datetime('Finish Loading')
+    LoadingDocFinish = fields.Datetime('Doc Finish')
+    DispatchFromOrigin = fields.Datetime('Dispatch From Origin')
+    ActualArrivalTime = fields.Datetime('Arrival at Destination')
+    StartUnloading = fields.Datetime('Start Unloading')
+    FinishUnloading = fields.Datetime('Finish Unloading')
+    FinishDocLoading = fields.Datetime('Finish Doc Loading')
+    DepartFromDestination = fields.Datetime('Depart From Destination')
     Status = fields.Selection(selection=[('pod','POD'),('halfpod','Half POD'),('cancelled','CANCELLED')],String='Status')
     partner_id = fields.Many2one(
         string="Partner",
@@ -52,6 +52,7 @@ class add_new_field(models.Model):
     Location = fields.Char(related='vehicle_id.Location',string='Current Location')
     WeightVehiclesRelated = fields.Integer(related='vehicle_id.WeightVehicles')
     VolumeVehiclesRelated = fields.Integer(related='vehicle_id.VolumeVehicles')
+    co_driver_id = fields.Char('Co Driver');
 
     state = fields.Selection(selection=[ ("draft", "Draft"),
             ("confirmed", "Confirmed"),
