@@ -240,12 +240,12 @@ class add_new_field_multiroute(models.Model):
 
     _inherit = 'fleet.route'
 
-    Arrival = fields.Date('Arrival')
-    ArrivalPlan = fields.Date('Arrival Plan')
-    StartUnloading = fields.Date('Start Unloading')
-    FinishUnloading = fields.Date('Finish Unloading')
-    FinishUnloadingDoc = fields.Date('Finish Unloading Doc')
-    DepartFromDestination = fields.Date('Depart From Dest')
+    Arrival = fields.Datetime('Arrival')
+    ArrivalPlan = fields.Datetime('Arrival Plan')
+    StartUnloading = fields.Datetime('Start Unloading')
+    FinishUnloading = fields.Datetime('Finish Unloading')
+    FinishUnloadingDoc = fields.Datetime('Finish Unloading Doc')
+    DepartFromDestination = fields.Datetime('Depart From Dest')
 
 class add_new_field_vehicles(models.Model):
 
