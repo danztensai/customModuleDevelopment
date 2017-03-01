@@ -38,8 +38,7 @@ Remark
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'templates.xml','report.xml','wizard/work_order_depart_views.xml',
-        'wizard/work_order_arrive_views.xml',
+        'templates.xml','report.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
