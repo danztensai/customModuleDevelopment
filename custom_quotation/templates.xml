@@ -15,5 +15,22 @@
 		</xpath>
             </field>
         </record>
+<record id="view_invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+		
+                <xpath expr="//tree[@string='Invoice Lines']//field[@name='account_analytic_id']" position="after">
+                <field name="Destination"/>
+				<field name="DeliveryOrder" />
+				<field name="Vehicle" />
+                <field name="DeliveryDate" />
+                <field name="DeliveryNumber" />
+		</xpath>
+            </field>
+        </record>
+				
+		
     </data>
 </openerp>
