@@ -28,7 +28,7 @@ Vechile number
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'templates.xml','invoice.xml',
+        'templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
