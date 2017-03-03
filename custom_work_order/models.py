@@ -66,6 +66,20 @@ class add_new_field(models.Model):
 
     Image = fields.Binary("Image",help="Insert Attachment Here")
 
+    NoDn = fields.Char('No DN')
+    Customer = fields.Char('Customer')
+    PicPhoneTop = fields.Char('PIC/ Phone')
+    SealNo = fields.Char('Seal No')
+    Date = fields.Datetime('Date')
+    NoOrder = fields.Char('No Order')
+    NoTruck = fields.Char('No Truck')
+    Consignee = fields.Char('Consignee')
+    DestinationDeliveryNote = fields.Char('Destination/Address')
+    PicPhoneBot = fields.Char('Pic / Phone')
+    itemList = fields.One2many(string="Item List",
+        comodel_name="fleet.work.order.item",
+        inverse_name="id")
+
     
     def on_change_weight(self,cr,user,ids,WeightVehicles,WeightVehiclesRelated,context=None):
         #Calculate the total
@@ -263,4 +277,14 @@ class add_new_field_customer(models.Model):
     _inherit ='res.partner'
 
     DestinationCode = fields.Char('Destination Code')
+
+class fleet_work_order_note(models.Model):
+
+    _name = 'fleet.work.order.item'
+
+    itemName = fields.Char('Item')
+    unit = fields.Char('Unit')
+    qty = fields.Integer('Quantity')
+    remark = fields.Char('Remark')
+    
 
