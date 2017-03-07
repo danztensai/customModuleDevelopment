@@ -65,7 +65,18 @@
 				</xpath>	
 				
 			<!--Bagian awal untuk di comment pada saat diserver -->	
-				<xpath expr="//tree[@string='Routes']//field[@name='name']" position="after">
+				
+				<!--Bagian Akhir -->
+			
+		     </field>
+        </record>
+		
+        <record id="fleet_work_order_view_form_multiple_inherit" model="ir.ui.view">
+            <field name="name">fleet.work.order inherit form on fleet_work_order_multiple_route</field>
+            <field name="model">fleet.work.order</field>
+            <field name="inherit_id" ref="fleet_work_order_multiple_route.fleet_work_order_view_form"/>
+			<field name="arch" type="xml">
+<xpath expr="//tree[@string='Routes']//field[@name='name']" position="after">
 					<field name="Arrival" />
 					<field name="ArrivalPlan" />
 					<field name="DepartFromDestination" />
@@ -74,11 +85,11 @@
 					<field name="FinishUnloadingDoc" />
 				</xpath>
 				
-				<!--Bagian Akhir -->
-			
-		     </field>
-        </record>
-		
+
+		</field>
+	</record>
+
+
 		<record id="fleet_vehicle_form_inherit" model="ir.ui.view">
             <field name="name">fleet.vehicle.form.inherit</field>
             <field name="model">fleet.vehicle</field>
