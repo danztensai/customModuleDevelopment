@@ -11,8 +11,8 @@
 				<button name="button_confirm" string="Confirm" type="object" class="oe_highlight" states="draft"/>
                 <button name="button_loading" string="Loading" type="object" class="oe_highlight" states="confirmed"/>
 				
-				<button name="341" string="Depart" type="action" class="oe_highlight" states="loading"/>
-                <button name="342" string="Arrive" type="action" class="oe_highlight" states="depart"/>                
+				<button name="%(fleet_work_order.work_order_depart_action)d" string="Depart" type="action" class="oe_highlight" states="loading"/>
+                <button name="%(fleet_work_order.work_order_arrive_action)d" string="Arrive" type="action" class="oe_highlight" states="depart"/>                
                 <button name="button_unloading" string="Unloading" type="object" class="oe_highlight" states="arrive"/>
 				<button name="button_finish" string="Finish" type="object" class="oe_highlight" states="unloading"/>
 				
@@ -43,16 +43,18 @@
 				<field name="WeightVehiclesRelated" readonly="1" /> Kg
 				<field name="VolumeVehiclesRelated" readonly="1"/> m³
 				</xpath>
-		        <xpath expr="//group[@name='group_route_1']" position="after">
+		        <xpath expr="//group[@name='group_route_1']" position="before">
 				<!-- <group name="group_route_4_status" colspan="2" col="2" attrs="{'invisible':[('multiple_route','=',False)]}"> -->
 				<group name="group_route_4_status" colspan="2" col="2" >
 				<field name="Status"/>
 			
 				</group>
 					<group name="group_route_3">
+            		<field name="orderDate"/>
             		<field name="LoadingPlan" />
 						<field name="SPM"/>
-			
+						
+						
 						<field name="StartLoading"/>
 						<field name="FinishLoading"/>					
 						<field name="LoadingDocFinish"/>
@@ -60,7 +62,7 @@
 						<field name="ActualArrivalTime"/>
 						<field name="StartUnloading"/>
 						<field name="DepartFromDestination"/>
-				
+						<field name="sealNo" />
 					</group>
 				</xpath>	
 				
@@ -84,7 +86,7 @@
 					<field name="FinishUnloading" />
 					<field name="FinishUnloadingDoc" />
 				</xpath>
-				
+										
 
 		</field>
 	</record>

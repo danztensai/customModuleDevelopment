@@ -6,6 +6,8 @@ class add_new_field(models.Model):
     _inherit = 'fleet.work.order'
     
    
+    sealNo = fields.Char ('Seal No')   
+    orderDate = fields.Datetime('Order Date')
     LoadingPlan = fields.Datetime('Loading Plan')
     ArrivalPlan = fields.Datetime('Arrival Plan')
     SPM = fields.Datetime('SPM')
