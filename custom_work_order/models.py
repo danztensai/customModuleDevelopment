@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
+import logging
+import datetime
 from openerp import models, fields, api
+
+_logger = logging.getLogger(__name__)
+
+
 
 class add_new_field(models.Model):
    
@@ -10,16 +16,19 @@ class add_new_field(models.Model):
     orderDate = fields.Datetime('Order Date')
     LoadingPlan = fields.Datetime('Loading Plan')
     ArrivalPlan = fields.Datetime('Arrival Plan')
-    SPM = fields.Datetime('SPM')
-    StartLoading = fields.Datetime('Start Loading')
-    FinishLoading = fields.Datetime('Finish Loading')
-    LoadingDocFinish = fields.Datetime('Doc Finish')
-    DispatchFromOrigin = fields.Datetime('Dispatch From Origin')
-    ActualArrivalTime = fields.Datetime('Arrival at Destination')
-    StartUnloading = fields.Datetime('Start Unloading')
-    FinishUnloading = fields.Datetime('Finish Unloading')
-    FinishDocLoading = fields.Datetime('Finish Doc Loading')
-    DepartFromDestination = fields.Datetime('Depart From Destination')
+    SPM = fields.Datetime('SPM',readonly=True)
+    StartLoading = fields.Datetime('Start Loading',readonly=True)
+    FinishLoading = fields.Datetime('Finish Loading',readonly=True)
+    LoadingDocFinish = fields.Datetime('Doc Finish',readonly=True)
+    DispatchFromOrigin = fields.Datetime('Dispatch From Origin',readonly=True)
+    ActualArrivalTime = fields.Datetime('Arrival at Destination',readonly=True)
+    StartUnloading = fields.Datetime('Start Unloading',readonly=True)
+    FinishUnloading = fields.Datetime('Finish Unloading',readonly=True)
+    FinishDocLoading = fields.Datetime(String='Finish Doc Loading',readonly=True)
+    DepartFromDestination = fields.Datetime(
+        string="Depart From Destination",
+        readonly=True,
+    )
     Status = fields.Selection(selection=[('pod','POD'),('halfpod','Half POD'),('cancelled','CANCELLED')],String='Status')
     partner_id = fields.Many2one(
         string="Partner",
@@ -110,17 +119,22 @@ class add_new_field(models.Model):
         return res
 
 
-    @api.one
+    @api.multi
     def button_loading(self):
-        self.write({'state':'loading'})
+        for order in self:
+            order._action_loading(fields.Datetime.now())
+     
 
-    @api.one
+    @api.multi
     def button_unloading(self):
-        self.write({'state':'unloading'})
+        for order in self:
+            order._action_unloading()
+        
 
-    @api.one
+    @api.multi
     def button_finish(self):
-        self.write({'state':'finish'})
+        for order in self:
+            order._action_finish()
 
     @api.one
     def button_exception(self):
@@ -192,6 +206,26 @@ class add_new_field(models.Model):
         self.write(self._prepare_confirm_data())
 
     @api.multi
+    def _action_loading(self,
+                       date_loading=fields.Datetime.now()):
+        self.ensure_one()
+
+        self.write(self._prepare_loading_data())
+    
+    @api.multi
+    def _action_unloading(self):
+        self.ensure_one()
+
+        self.write(self._prepare_unloading_data())
+
+    @api.multi
+    def _action_finish(self):
+        self.ensure_one()
+
+        self.write(self._prepare_finish())
+
+
+    @api.multi
     def _action_depart(self,
                        date_depart=fields.Datetime.now(),
                        starting_odometer=0.0):
@@ -200,6 +234,7 @@ class add_new_field(models.Model):
         self.write(self._prepare_depart_data(date_depart,
                                              starting_odometer))
 
+
     @api.multi
     def _action_arrive(self,
                        date_arrive=fields.Datetime.now(),
@@ -207,6 +242,7 @@ class add_new_field(models.Model):
         self.ensure_one()
         self.write(self._prepare_arrive_data(date_arrive,
                                              ending_odometer))
+
 
     @api.multi
     def _action_restart(self):
@@ -221,12 +257,41 @@ class add_new_field(models.Model):
         }
 
     @api.multi
+    def _prepare_loading_data(self):
+        self.ensure_one()
+
+        return {'state':'loading',
+            'SPM': datetime.datetime.now(),
+            'StartLoading': datetime.datetime.now(),
+            'FinishLoading': datetime.datetime.now(),
+            'LoadingDocFinish' : datetime.datetime.now(),
+        }
+    
+    @api.multi
+    def _prepare_unloading_data(self):
+        self.ensure_one()
+
+        return {'state':'unloading',
+            'StartUnloading': datetime.datetime.now(),
+        }
+
+    @api.multi
+    def _prepare_finish(self):
+        self.ensure_one()
+
+        return {'state':'finish',
+            'DepartFromDestination': datetime.datetime.now(),
+        }
+
+    @api.multi
     def _prepare_depart_data(self, date_depart, starting_odometer):
         self.ensure_one()
+      
         return {
             'state': 'depart',
             'real_date_depart': date_depart,
             'start_odometer': starting_odometer,
+            'DispatchFromOrigin' : date_depart,
         }
 
     @api.multi
@@ -236,6 +301,7 @@ class add_new_field(models.Model):
             'state': 'arrive',
             'real_date_arrive': date_arrive,
             'end_odometer': ending_odometer,
+            'ActualArrivalTime' : date_arrive,
         }
 
     @api.multi

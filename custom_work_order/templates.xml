@@ -62,6 +62,7 @@
 						<field name="ActualArrivalTime"/>
 						<field name="StartUnloading"/>
 						<field name="DepartFromDestination"/>
+
 						<field name="sealNo" />
 					</group>
 				</xpath>	
