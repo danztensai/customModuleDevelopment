@@ -63,7 +63,7 @@ class add_new_field(models.Model):
     Location = fields.Char(related='vehicle_id.Location',string='Current Location')
     WeightVehiclesRelated = fields.Integer(related='vehicle_id.WeightVehicles')
     VolumeVehiclesRelated = fields.Integer(related='vehicle_id.VolumeVehicles')
-    co_driver_id = fields.Char('Co Driver');
+    
 
     state = fields.Selection(selection=[ ("draft", "Draft"),
             ("confirmed", "Confirmed"),
