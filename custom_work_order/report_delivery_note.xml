@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report id="report_delivery_note_action"
+			string="Delivery Note"
+			model="fleet.work.order"
+			report_type="qweb-pdf"
+			name="custom_work_order.report_delivery_note_template"
+			/>
+			<template id="report_delivery_note_template">
+					<t t-call="report.html_container">
+					<t t-foreach="docs" t-as="o">
+					<t t-call="report.external_layout">
+					<div class="page">
+					<!-- Report page content -->
+					 <h2>Work Order  <span t-field="o.name"/></h2>
+
+                    <div class="row">
+						<div class="col-xs-6">
+						<h3>Order Information</h3>
+							<dl class="dl-horizontal">
+								<dt>ETD</dt>
+								<dd><span t-field="o.date_start"/></dd>
+								<dt>ETA</dt>
+								<dd><span t-field="o.date_end"/></dd>
+								<dt>Type</dt>
+								<dd><span t-field="o.type_id"/></dd>
+								<dt>Partner</dt>
+								<dd><span t-field="o.partner_id"/></dd>
+								<dt>Destination Code</dt>
+								<dd><span t-field="o.DestinationCode"/></dd>
+								<dt>Weight Vehicle</dt>
+								<dd><span t-field="o.WeightVehicles"/> Kg</dd>
+								<dt>Volume</dt>
+								<dd><span t-field="o.VolumeVehicles"/> m3 </dd>
+								
+							</dl>
+						
+						</div>
+						
+						
+						
+						<div class="col-xs-6">
+						<h3>Vehicle</h3>
+							<dl class="dl-horizontal">
+								<dt>Vehicle</dt>
+								<dd><span t-field="o.vehicle_id"/></dd>
+								<dt>License Plate</dt>
+								<dd><span t-field="o.licensePlate"/></dd>
+								<dt>CurrentLocation</dt>
+								<dd><span t-field="o.Location"/></dd>
+								<dt>Max Weight Vehicle</dt>
+								<dd><span t-field="o.WeightVehiclesRelated"/> Kg</dd>
+								<dt>Max Volume Vehicle</dt>
+								<dd><span t-field="o.VolumeVehiclesRelated"/></dd>
+								
+								
+							</dl>
+						
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-xs-6">
+						<h3>Route</h3>
+							<dl class="dl-horizontal">
+								<dt>Status</dt>
+								<dd><span t-field="o.Status"/></dd>
+								<dt>Loading Plan</dt>
+								<dd><span t-field="o.LoadingPlan"/></dd>
+								<dt>SPM</dt>
+								<dd><span t-field="o.SPM"/></dd>
+								<dt>Start Loading</dt>
+								<dd><span t-field="o.StartLoading"/></dd>
+								
+							</dl>
+						
+						</div>
+						<div class="col-xs-6">
+						<br/>
+						<br/>
+						<dt>Finish Loading</dt>
+								<dd><span t-field="o.FinishLoading"/></dd>
+								<dt>Doc Finish</dt>
+								<dd><span t-field="o.LoadingDocFinish"/></dd>
+								<dt>Dispatch From Origin</dt>
+								<dd><span t-field="o.DispatchFromOrigin"/></dd>
+								<dt>Arival at Destination</dt>
+								<dd><span t-field="o.ActualArrivalTime"/></dd>
+								<dt>Start Unloading</dt>
+								<dd><span t-field="o.StartUnloading"/></dd>
+								<dt>Depart From Destination </dt>
+								<dd><span t-field="o.DepartFromDestination"/></dd>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group">
+					      <label for="comment">Comment:</label>
+					      <textarea class="form-control" rows="5" id="comment"></textarea>
+					    </div>
+					  <div class="form-group">
+					
+1. Langsung Ke alamat Tujuan&#160;&#160;&#160;
+  
+     <input type="checkbox" name="keywords" value="__option__"/>
+  
+ --------------------------------------<br/>
+ <br/>
+ 2. Tujuan Di alihkan
+  
+    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" name="keywords" value="__option__"/>
+  
+ --------------------------------------
+ <br/>
+ <br/>
+ 3. Dikembalikan Ke warehouse&#160;&#160;
+  
+     <input type="checkbox" name="keywords" value="__option__"/>
+  
+ --------------------------------------<br/>
+ <br/>
+
+
+ 
+
+					    </div>
+
+
+<h3>Dengan Perincian Barang  yang diterima  dalam kondisi sebagai Berikut:</h3>  
+ <div class="form-group">
+					
+1. Langsung Ke alamat Tujuan&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+     Baik <input type="checkbox" name="keywords" value="__option__"/>
+     Rusak <input type="checkbox" name="keywords" value="__option__"/>
+  
+
+ <br/>
+ 2. Jumlah Barang apakah sesuai Dokumen
+  
+    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Ya <input type="checkbox" name="keywords" value="__option__"/>
+  
+Tidak <input type="checkbox" name="keywords" value="__option__"/>
+ <br/>
+ <br/>
+ 3. Keterangan&#160;&#160;<br/><div style="width:500px;height:100px;border:1px solid #000;"></div>
+  
+ <br/>
+
+
+ 
+
+					    </div>
+              <h3>Demikian Berita Acara Ini dibuat dengan sebenar-benarnya dan agar dapat digunakan  dengan sebagaimana mestinya</h3>
+
+					</div>
+					
+				
+					</div>
+					</t>
+					</t>
+					</t>
+			</template>
+	</data>
+</openerp>
