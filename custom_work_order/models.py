@@ -169,7 +169,11 @@ class add_new_field(models.Model):
 
     @api.constrains("state", "vehicle_id", "driver_id")
     def _check_vehicle_driver(self):
-        
+        if self.state == "depart":
+            if not self.vehicle_id or \
+                    not self.driver_id:
+                raise except_orm(_("Warning!"), _(
+                    "Vehicle and driver required"))
 
     @api.onchange("vehicle_id")
     def onchange_vehicle_id(self):
