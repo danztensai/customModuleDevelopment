@@ -1,0 +1,1244 @@
+<?xml version="1.0"?>
+   <openerp>
+     <data >
+       <!-- Data to load -->
+       <record id="master_bank_id" model="res.partner.bank" >
+       	<field name="state">bank</field>
+       	<field name="bank_name">Bank CTBC Indonesia</field>
+       	<field name="acc_number">001018100110001</field>
+       </record>
+
+       <record id="master_company" model="res.company" >
+         <field name="name">PT Wima Logistic International</field>
+         <field name="city">DKI Jakarta</field>
+         <field name="street">Jl.Boulevard Barat Raya LC VI No.62-63 ,Kelapa gading ,jakarat Utara ,DKI Jakarta ,14240</field>
+       	 <field name="bank_ids" eval="[(6,0, [ref('custom_work_order.master_bank_id')])]"/>
+      </record>
+	
+	 <record id="master_pph" model="account.tax" >
+  		<field name="name">PPH 23</field>
+  		<field name="description">PPH 23</field>
+  		<field name="type_tax_use">all</field>
+  		<field name="active">true</field>
+  		<field name="type">percent</field>
+  		<field name="amount">-0.02000</field>
+  		<field name="sequence">1</field>
+  		
+  		<field name="ref_base_sign" >1.00000</field>
+  		<field name="base_sign">1.00000</field>
+  		<field name="tax_sign">1.00000</field>
+  		<field name="ref_tax_sign">1.00000</field>
+  	</record>
+
+ <record id="master_ppn" model="account.tax" >
+  		<field name="name">PPN 10%</field>
+  		<field name="description">PPH 23</field>
+  		<field name="type_tax_use">all</field>
+  		<field name="active">true</field>
+  		<field name="type">percent</field>
+  		<field name="amount">0.10000</field>
+  		<field name="sequence">1</field>
+  		
+  		<field name="ref_base_sign" >1.00000</field>
+  		<field name="base_sign">1.00000</field>
+  		<field name="tax_sign">1.00000</field>
+  		<field name="ref_tax_sign">1.00000</field>
+  	</record>
+
+   
+
+    <record id="Debtors_Lixil_Project_Id" model="account.account">
+      <field name="code">110201</field>
+      <field name="name">Debtors Lixil Project</field>
+      <field ref="account.conf_cas" name="parent_id"/>
+      <field name="type">receivable</field>
+      <field name="user_type" ref="account.data_account_type_receivable"/>
+      <field name="note">General Receivable Customer</field>
+      
+    </record>
+
+    <record id="Tax_Paid_Lixil_Project" model="account.account">
+      <field name="code">110301</field>
+      <field name="name">Tax Paid Lixil Project</field>
+      <field ref="account.conf_cas" name="parent_id"/>
+      <field name="type">other</field>
+      <field name="user_type" ref="account.data_account_type_asset"/>
+      <field name="note">Tax Project Lixil Paid</field>
+      <field name="tax_ids" eval="[(4, ref('custom_work_order.master_ppn'))]" />
+    </record>
+
+<record id="Tax_Paid_MTS_Multilink" model="account.account">
+      <field name="code">110302</field>
+      <field name="name">Tax Paid MTS - Multilink</field>
+      <field ref="account.conf_cas" name="parent_id"/>
+      <field name="type">other</field>
+      <field name="user_type" ref="account.data_account_type_asset"/>
+      <field name="note">Tax Paid MTS - Multilink</field>
+      <field name="tax_ids" eval="[(4, ref('custom_work_order.master_pph'))]" />
+    </record>
+
+    <record id="Debtors_MTS_Multilink" model="account.account">
+      <field name="code">110401</field>
+      <field name="name">Debtors MTS - Multilink</field>
+      <field ref="account.conf_cas" name="parent_id"/>
+      <field name="type">receivable</field>
+      <field name="user_type" ref="account.data_account_type_receivable"/>
+      <field name="note">Debtors MTS - Multilink</field>
+     
+    </record>
+
+     <record id="Debtors_MAS_Mastiga" model="account.account">
+      <field name="code">110402</field>
+      <field name="name">Debtors_MAS_Mastiga</field>
+      <field ref="account.conf_cas" name="parent_id"/>
+      <field name="type">receivable</field>
+      <field name="user_type" ref="account.data_account_type_receivable"/>
+      <field name="note">Debtors MAS - Mastiga</field>
+     
+    </record>
+
+        <record id="Debtors_MNJ_Mandiri" model="account.account">
+      <field name="code">110403</field>
+      <field name="name">Debtors MNJ - Mandiri
+</field>
+      <field ref="account.conf_cas" name="parent_id"/>
+      <field name="type">receivable</field>
+      <field name="user_type" ref="account.data_account_type_receivable"/>
+      <field name="note">Debtors MNJ - Mandiri</field>
+     
+    </record>
+
+
+
+<record id="Tax_Paid_MAS_Mastiga" model="account.account">
+      <field name="code">110303</field>
+      <field name="name">Tax Paid MAS - Mastiga</field>
+      <field ref="account.conf_cas" name="parent_id"/>
+      <field name="type">other</field>
+      <field name="user_type" ref="account.data_account_type_asset"/>
+      <field name="note">Tax Paid MAS - Mastiga</field>
+      <field name="tax_ids" eval="[(4, ref('custom_work_order.master_pph'))]" />
+    </record>
+
+<record id="Tax_Paid_MNJ_Mandiri" model="account.account">
+      <field name="code">110304</field>
+      <field name="name">Tax Paid MNJ - Mandiri</field>
+      <field ref="account.conf_cas" name="parent_id"/>
+      <field name="type">other</field>
+      <field name="user_type" ref="account.data_account_type_asset"/>
+      <field name="note">Tax Paid MNJ - Mandiri</field>
+      <field name="tax_ids" eval="[(4, ref('custom_work_order.master_pph'))]" />
+    </record>
+
+    <record id="Creditors_Lixil_Project" model="account.account">
+      <field name="code">120201</field>
+      <field name="name">Tax Paid MNJ - Mandiri</field>
+      <field ref="account.conf_cli" name="parent_id"/>
+      <field name="type">other</field>
+      <field name="user_type" ref="account.data_account_type_payable"/>
+      <field name="note">Payable Project Lixil</field>
+      
+    </record>
+    
+    <record id="Creditors_MTS_Multilink" model="account.account">
+      <field name="code">120401</field>
+      <field name="name">Creditors MTS - Multilink</field>
+      <field ref="account.conf_cli" name="parent_id"/>
+      <field name="type">payable</field>
+      <field name="user_type" ref="account.data_account_type_payable"/>
+      <field name="note">Creditors MTS - Multilink</field>
+      
+    </record>
+
+
+    <record id="Creditors_MAS_Mastiga" model="account.account">
+      <field name="code">120402</field>
+      <field name="name">Creditors MAS - Mastiga</field>
+      <field ref="account.conf_cli" name="parent_id"/>
+      <field name="type">payable</field>
+      <field name="user_type" ref="account.data_account_type_payable"/>
+      <field name="note">Creditors MAS - Mastiga</field>
+      
+    </record>
+
+     <record id="Creditors_MNJ_Mandiri" model="account.account">
+      <field name="code">120403</field>
+      <field name="name">Creditors MNJ - Mandiri</field>
+      <field ref="account.conf_cli" name="parent_id"/>
+      <field name="type">payable</field>
+      <field name="user_type" ref="account.data_account_type_payable"/>
+      <field name="note">Creditors MNJ - Mandiri</field>
+      
+    </record>
+
+     <record id="master_origin" model="res.partner">
+     	<field name="is_company">true</field>
+     	<field name="DestinationCode">OLIX0001</field>
+     	<field name="name">PT American Standard</field>
+     	<field name="street" >Jl. Raya Narogong KM. 52 Kel. Limus Nunggal, Kec. Cileungsi Bogor - Jawa Barat 16820
+		</field>
+		<field name="city" >Bekasi</field>
+		<field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+		<field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+	</record>
+
+   <!-- MASTER DESTINATION -->
+
+        <record id="master_destination_id_1" model="res.partner">
+         <field name="DestinationCode">DBSI0001</field>
+         <field name="name">BSI Jakarta</field>
+         <field name="city">Jakarta</field>
+         <field name="street">PT BUILDER SHOP INDONESIA
+GD. Bursa Efek Indonesia Tower II
+Suite 2801 SCBDPT BUILDER SHOP INDONESIA
+GD. Bursa Efek Indonesia Tower II
+Suite 2801 SCBDPT BUILDER SHOP INDONESIA
+GD. Bursa Efek Indonesia Tower II
+Suite 2801 SCBDPT BUILDER SHOP INDONESIA
+GD. Bursa Efek Indonesia Tower II
+Suite 2801 SCBD</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_2" model="res.partner">
+         <field name="DestinationCode">DCAS0001</field>
+         <field name="name">CAS Jakarta</field>
+         <field name="city">Jakarta</field>
+         <field name="street">PT. CATURADITYA SENTOSA
+Jl. Rawa Sumur II Blok BB No. 7
+KIP, JatinegaraPT. CATURADITYA SENTOSA
+Jl. Rawa Sumur II Blok BB No. 7
+KIP, JatinegaraPT. CATURADITYA SENTOSA
+Jl. Rawa Sumur II Blok BB No. 7
+KIP, JatinegaraPT. CATURADITYA SENTOSA
+Jl. Rawa Sumur II Blok BB No. 7
+KIP, Jatinegara</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_3" model="res.partner">
+         <field name="DestinationCode">DCAS0002</field>
+         <field name="name">CAS Pulogadung</field>
+         <field name="city">Jakarta</field>
+         <field name="street">PT Catur Aditya Sentosa, JL Rawa Sumur II kawasan Industri Pulogadung</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_4" model="res.partner">
+         <field name="DestinationCode">DCKD0001</field>
+         <field name="name">CKD Bandung</field>
+         <field name="city">Bandung</field>
+         <field name="street">PT. Catur Krada Depo bangunan. JL soekarno hatta Cipamokalan Rancasari Bandung</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_5" model="res.partner">
+         <field name="DestinationCode">DCKD0002</field>
+         <field name="name">CKD Bogor</field>
+         <field name="city">Bogor</field>
+         <field name="street">PT Catur krada Depo Bangunan, JL. KH Soleh Iskandar. Bogor</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_6" model="res.partner">
+         <field name="DestinationCode">DCKD0003</field>
+         <field name="name">CKD Jakarta</field>
+         <field name="city">Jakarta</field>
+         <field name="street">PT. CATURKARDA DEPO BANGUNAN
+Jl. Kalimalang No. 46 Rt 01/07 Pondok Bambu Duren Sawit  JakartaPT. CATURKARDA DEPO BANGUNAN
+Jl. Kalimalang No. 46 Rt 01/07 Pondok Bambu Duren Sawit  JakartaPT. CATURKARDA DEPO BANGUNAN
+Jl. Kalimalang No. 46 Rt 01/07 Pondok Bambu Duren Sawit  JakartaPT. CATURKARDA DEPO BANGUNAN
+Jl. Kalimalang No. 46 Rt 01/07 Pondok Bambu Duren Sawit  Jakarta</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_7" model="res.partner">
+         <field name="DestinationCode">DCKD0004</field>
+         <field name="name">CKD Tangerang</field>
+         <field name="city">Tangerang</field>
+         <field name="street">PT Catur Karda Depo bangunan, Serpong</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_8" model="res.partner">
+         <field name="DestinationCode">DCMS0001</field>
+         <field name="name">CMS BALI</field>
+         <field name="city">BALI</field>
+         <field name="street">PT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANGPT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANGPT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANGPT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANG</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_9" model="res.partner">
+         <field name="DestinationCode">DCMS0002</field>
+         <field name="name">CMS Bogor</field>
+         <field name="city">Bogor</field>
+         <field name="street">PT. CATUR MITRA SEJATI SENTOSA
+Komp Gudang Sentra Kosambi Dadap TanggerangPT. CATUR MITRA SEJATI SENTOSA
+Komp Gudang Sentra Kosambi Dadap TanggerangPT. CATUR MITRA SEJATI SENTOSA
+Komp Gudang Sentra Kosambi Dadap TanggerangPT. CATUR MITRA SEJATI SENTOSA
+Komp Gudang Sentra Kosambi Dadap Tanggerang</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_10" model="res.partner">
+         <field name="DestinationCode">DCMS0003</field>
+         <field name="name">CMS Jakarta</field>
+         <field name="city">Jakarta</field>
+         <field name="street">PT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANGPT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANGPT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANGPT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANG</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_11" model="res.partner">
+         <field name="DestinationCode">DCMS0004</field>
+         <field name="name">CMS SURABAYA</field>
+         <field name="city">SURABAYA</field>
+         <field name="street">PT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANGPT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANGPT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANGPT. CATUR MITRA SEJATI SENTOSA
+Komp. Gudang Sentra Kosambi Dadap 
+TANGGERANG</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_12" model="res.partner">
+         <field name="DestinationCode">DCSA0001</field>
+         <field name="name">CSA Bandung</field>
+         <field name="city">Bandung</field>
+         <field name="street">Catur Sentosa adiprana,  TBK. Jl. Kopo Jaya III  nO18, bandung</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_13" model="res.partner">
+         <field name="DestinationCode">DCSA0002</field>
+         <field name="name">CSA BEKASI</field>
+         <field name="city">BEKASI</field>
+         <field name="street">PT. CATUR SENTOSA ADIPRANA
+Jl. Raya Narogong KM 12 Pangkalan 3
+Rt 4/1 BEKASIPT. CATUR SENTOSA ADIPRANA
+Jl. Raya Narogong KM 12 Pangkalan 3
+Rt 4/1 BEKASIPT. CATUR SENTOSA ADIPRANA
+Jl. Raya Narogong KM 12 Pangkalan 3
+Rt 4/1 BEKASIPT. CATUR SENTOSA ADIPRANA
+Jl. Raya Narogong KM 12 Pangkalan 3
+Rt 4/1 BEKASI</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_14" model="res.partner">
+         <field name="DestinationCode">DCSA0003</field>
+         <field name="name">CSA Cirebon</field>
+         <field name="city">Cirebon</field>
+         <field name="street">PT Catur Sentosa Adiprana, Jl. Raya Jatimerta Cirebon Utara</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_15" model="res.partner">
+         <field name="DestinationCode">DCSA0004</field>
+         <field name="name">CSA GARUT</field>
+         <field name="city">GARUT</field>
+         <field name="street">PT. CATUR SENTOSA ADIPRANA
+Jl. Sudirman No 131 Kel. Karang Pawitan Suci
+GARUTPT. CATUR SENTOSA ADIPRANA
+Jl. Sudirman No 131 Kel. Karang Pawitan Suci
+GARUTPT. CATUR SENTOSA ADIPRANA
+Jl. Sudirman No 131 Kel. Karang Pawitan Suci
+GARUTPT. CATUR SENTOSA ADIPRANA
+Jl. Sudirman No 131 Kel. Karang Pawitan Suci
+GARUT</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_16" model="res.partner">
+         <field name="DestinationCode">DCSA0005</field>
+         <field name="name">CSA Jakarta</field>
+         <field name="city">Jakarta</field>
+         <field name="street">PT. CATUR SENTOSA
+Jl. Komp Pergudangan Semanan Megah
+JAKARTA PUSATPT. CATUR SENTOSA
+Jl. Komp Pergudangan Semanan Megah
+JAKARTA PUSATPT. CATUR SENTOSA
+Jl. Komp Pergudangan Semanan Megah
+JAKARTA PUSAT</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_17" model="res.partner">
+         <field name="DestinationCode">DCSA0006</field>
+         <field name="name">CSA Jember</field>
+         <field name="city">Jember</field>
+         <field name="street">PT. CATUR SENTOSA ADIPRANA
+Jl. Imam Bonjol No. 12 JemberPT. CATUR SENTOSA ADIPRANA
+Jl. Imam Bonjol No. 12 JemberPT. CATUR SENTOSA ADIPRANA
+Jl. Imam Bonjol No. 12 Jember</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_18" model="res.partner">
+         <field name="DestinationCode">DCSA0007</field>
+         <field name="name">CSA Malang</field>
+         <field name="city">Malang</field>
+         <field name="street">PT. CATUR SENTOSA ADIPRANA
+Jl. Tenaga Baru II/7 MALANGPT. CATUR SENTOSA ADIPRANA
+Jl. Tenaga Baru II/7 MALANGPT. CATUR SENTOSA ADIPRANA
+Jl. Tenaga Baru II/7 MALANG</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_19" model="res.partner">
+         <field name="DestinationCode">DCSA0008</field>
+         <field name="name">CSA SERANG</field>
+         <field name="city">SERANG</field>
+         <field name="street">PT. CATUR SENTOSA ADIPRANA
+Jl. Raya Cilegon Km 4,5 (depan perbekalan militer)
+SerangPT. CATUR SENTOSA ADIPRANA
+Jl. Raya Cilegon Km 4,5 (depan perbekalan militer)
+SerangPT. CATUR SENTOSA ADIPRANA
+Jl. Raya Cilegon Km 4,5 (depan perbekalan militer)
+Serang</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_20" model="res.partner">
+         <field name="DestinationCode">DCSA0009</field>
+         <field name="name">CSA Surabaya</field>
+         <field name="city">SURABAYA</field>
+         <field name="street">PT. CATUR SENTOSA ADIPRANA
+Jl. Mergomulyo No. 44 Blok DD 2, 3, 4 
+SurabayaPT. CATUR SENTOSA ADIPRANA
+Jl. Mergomulyo No. 44 Blok DD 2, 3, 4 
+SurabayaPT. CATUR SENTOSA ADIPRANA
+Jl. Mergomulyo No. 44 Blok DD 2, 3, 4 
+Surabaya</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_21" model="res.partner">
+         <field name="DestinationCode">DCSA0010</field>
+         <field name="name">CSA Tangerang</field>
+         <field name="city">Tangerang</field>
+         <field name="street">PT Catur Sentosa Adiprana. Komp pergudangan Semanan Tangerang </field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_22" model="res.partner">
+         <field name="DestinationCode">DCSA0011</field>
+         <field name="name">CSA Tasikmalaya</field>
+         <field name="city">Tasikmalaya</field>
+         <field name="street">PT. CATUR SENTOSA ADIPRANA
+Jl. Brigjen Sutoko Rt. 02/02
+TASIKMALAYAPT. CATUR SENTOSA ADIPRANA
+Jl. Brigjen Sutoko Rt. 02/02
+TASIKMALAYAPT. CATUR SENTOSA ADIPRANA
+Jl. Brigjen Sutoko Rt. 02/02
+TASIKMALAYA</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_23" model="res.partner">
+         <field name="DestinationCode">DCSL0001</field>
+         <field name="name">CSL Cengkareng</field>
+         <field name="city">Tangerang</field>
+         <field name="street">PT. CIPTA SANI LESTARI
+Gedung JDC Ruang GF 03-04
+Jl. Gatot Subroto No.53PT. CIPTA SANI LESTARI
+Gedung JDC Ruang GF 03-04
+Jl. Gatot Subroto No.53PT. CIPTA SANI LESTARI
+Gedung JDC Ruang GF 03-04
+Jl. Gatot Subroto No.53</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_24" model="res.partner">
+         <field name="DestinationCode">DEPA0001</field>
+         <field name="name">EPA Kudus</field>
+         <field name="city">KUDUS</field>
+         <field name="street">PT. EKA PRIMA AGUNG
+Jl. Gatot Subroto Blok 1 No.1
+KIC, Kel. Ngaliyan, SEMARANGPT. EKA PRIMA AGUNG
+Jl. Gatot Subroto Blok 1 No.1
+KIC, Kel. Ngaliyan, SEMARANGPT. EKA PRIMA AGUNG
+Jl. Gatot Subroto Blok 1 No.1
+KIC, Kel. Ngaliyan, SEMARANG</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_25" model="res.partner">
+         <field name="DestinationCode">DEPA0002</field>
+         <field name="name">EPA Semarang</field>
+         <field name="city">SEMARANG</field>
+         <field name="street">PT. EKA PRIMA AGUNG
+Jl. Gatot Subroto Blok 1 No.1
+KIC, Kel. Ngaliyan, SEMARANGPT. EKA PRIMA AGUNG
+Jl. Gatot Subroto Blok 1 No.1
+KIC, Kel. Ngaliyan, SEMARANGPT. EKA PRIMA AGUNG
+Jl. Gatot Subroto Blok 1 No.1
+KIC, Kel. Ngaliyan, SEMARANG</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_26" model="res.partner">
+         <field name="DestinationCode">DGBU0001</field>
+         <field name="name">GBU Tangerang</field>
+         <field name="city">Tangerang</field>
+         <field name="street">PT. GARUDA BUMI UTAMA
+proyek olive hotels
+Jl. Imam Bonjol TANGGERANGPT. GARUDA BUMI UTAMA
+proyek olive hotels
+Jl. Imam Bonjol TANGGERANGPT. GARUDA BUMI UTAMA
+proyek olive hotels
+Jl. Imam Bonjol TANGGERANG</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_27" model="res.partner">
+         <field name="DestinationCode">DGJA0001</field>
+         <field name="name">GJA Purwokerto</field>
+         <field name="city">Purwokerto</field>
+         <field name="street">PT. GUNUNG JATI ABADI
+Jl. Gerilya (samping Hotel Wijaya)
+PurwokertoPT. GUNUNG JATI ABADI
+Jl. Gerilya (samping Hotel Wijaya)
+PurwokertoPT. GUNUNG JATI ABADI
+Jl. Gerilya (samping Hotel Wijaya)
+Purwokerto</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_28" model="res.partner">
+         <field name="DestinationCode">DGJA0002</field>
+         <field name="name">GJA Tegal</field>
+         <field name="city">Tegal</field>
+         <field name="street">Gunung Jati Abadi, TEGAL</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_29" model="res.partner">
+         <field name="DestinationCode">DGJM0001</field>
+         <field name="name">GJM Solo</field>
+         <field name="city">SOLO</field>
+         <field name="street">PT. Gunung Jati Mulia</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_30" model="res.partner">
+         <field name="DestinationCode">DGJR0001</field>
+         <field name="name">GJR Kudus</field>
+         <field name="city">KUDUS</field>
+         <field name="street">PT GUNUNG JATI RAYA KUDUS
+ Jl. Raya mejobo No. 276 RT. 04/01 
+Ds. Megawon KudusPT GUNUNG JATI RAYA KUDUS
+ Jl. Raya mejobo No. 276 RT. 04/01 
+Ds. Megawon KudusPT GUNUNG JATI RAYA KUDUS
+ Jl. Raya mejobo No. 276 RT. 04/01 
+Ds. Megawon Kudus</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_31" model="res.partner">
+         <field name="DestinationCode">DGJR0002</field>
+         <field name="name">GJR Semarang</field>
+         <field name="city">SEMARANG</field>
+         <field name="street">PT. GUNUNG JATI RAYA
+Jl. Industri timur raya a 37
+lingkungan kaligawe SemarangPT. GUNUNG JATI RAYA
+Jl. Industri timur raya a 37
+lingkungan kaligawe SemarangPT. GUNUNG JATI RAYA
+Jl. Industri timur raya a 37
+lingkungan kaligawe Semarang</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_32" model="res.partner">
+         <field name="DestinationCode">DGMA0001</field>
+         <field name="name">GMA Purwokerto</field>
+         <field name="city">Purwokerto</field>
+         <field name="street">PT. GARUDA MITRA ABADI JAYA
+Jl. HM. Bahrun No. 100 Rt. 004/01
+PURWOKERTO WETANPT. GARUDA MITRA ABADI JAYA
+Jl. HM. Bahrun No. 100 Rt. 004/01
+PURWOKERTO WETAN</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_33" model="res.partner">
+         <field name="DestinationCode">DIND0001</field>
+         <field name="name">IG Bandung</field>
+         <field name="city">Bandung</field>
+         <field name="street">CV. INDO GROUP
+Jl Kuta Raya Kompleks Kota Bali
+BANDUNGCV. INDO GROUP
+Jl Kuta Raya Kompleks Kota Bali
+BANDUNG</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_34" model="res.partner">
+         <field name="DestinationCode">DKSA0001</field>
+         <field name="name">KSA Jakut</field>
+         <field name="city">Jakarta</field>
+         <field name="street">PT. KEMANG SUAR ARTHA
+Rukan Artha Gading Niaga Block C1
+Boulevard JAKUTPT. KEMANG SUAR ARTHA
+Rukan Artha Gading Niaga Block C1
+Boulevard JAKUT</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_35" model="res.partner">
+         <field name="DestinationCode">DMBS0001</field>
+         <field name="name">MBS Bekasi</field>
+         <field name="city">BEKASI</field>
+         <field name="street">PT. MITRA BANGUNAN SUPERMARKET
+Jl. Ir. Juanda No.99 E-G Bulak Kapal
+Bekasi TimurPT. MITRA BANGUNAN SUPERMARKET
+Jl. Ir. Juanda No.99 E-G Bulak Kapal
+Bekasi Timur</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_36" model="res.partner">
+         <field name="DestinationCode">DMIT0001</field>
+         <field name="name">MIT SUrabaya</field>
+         <field name="city">SURABAYA</field>
+         <field name="street">Mitra 10 DC Driyorejo, 
+Jl Raya Cangkir KM 21 No. 450 
+Ds Cangkir  DriyorejoMitra 10 DC Driyorejo, 
+Jl Raya Cangkir KM 21 No. 450 
+Ds Cangkir  Driyorejo</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_37" model="res.partner">
+         <field name="DestinationCode">DMJL0001</field>
+         <field name="name">MJL Surabaya</field>
+         <field name="city">SURABAYA</field>
+         <field name="street">CV. MEKAR JAYA LESTARI
+Komp. Pergudangan Meiko Abadi
+B-38 Ds Wedi SidoarjoCV. MEKAR JAYA LESTARI
+Komp. Pergudangan Meiko Abadi
+B-38 Ds Wedi Sidoarjo</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_38" model="res.partner">
+         <field name="DestinationCode">DPER0001</field>
+         <field name="name">PG Bekasi</field>
+         <field name="city">BEKASI</field>
+         <field name="street">PT. PERUNDING GESTIAN </field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_39" model="res.partner">
+         <field name="DestinationCode">DPER0002</field>
+         <field name="name">PG Jaksel</field>
+         <field name="city">Jakarta</field>
+         <field name="street">PT. PERUNDING GESTIAN 
+GEDUNG GRAHA ISKANDARSYAH
+No. 66C Kebayoran Baru
+PT. PERUNDING GESTIAN 
+GEDUNG GRAHA ISKANDARSYAH
+No. 66C Kebayoran Baru
+</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_40" model="res.partner">
+         <field name="DestinationCode">DPER0003</field>
+         <field name="name">PG Jakut</field>
+         <field name="city">Jakarta</field>
+         <field name="street">PT. PERUNDING GESTIAN 
+Jl. HBR Motik, landas pacu timur
+kemayoran  pademangan JAKUT
+PT. PERUNDING GESTIAN 
+Jl. HBR Motik, landas pacu timur
+kemayoran  pademangan JAKUT
+</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_41" model="res.partner">
+         <field name="DestinationCode">DSHC0001</field>
+         <field name="name">SHC Bogor</field>
+         <field name="city">Bogor</field>
+         <field name="street">Sinar Abadi Home Centre JL Pahlawan no 175. Bogor</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_42" model="res.partner">
+         <field name="DestinationCode">DSUR0001</field>
+         <field name="name">SJ Jakut</field>
+         <field name="city">Jakarta</field>
+         <field name="street">PT SURYAPRBHA JATISATYA. Jl. Kapuk Kamal raya JAKUT</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_43" model="res.partner">
+         <field name="DestinationCode">DSUR0002</field>
+         <field name="name">SJ Malang</field>
+         <field name="city">Malang</field>
+         <field name="street">PT. SURYAPRABHA JATISATYA Mega Depo Malang,  Jatim</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_44" model="res.partner">
+         <field name="DestinationCode">DSUR0003</field>
+         <field name="name">SJ Sidoarjo</field>
+         <field name="city">SURABAYA</field>
+         <field name="street">PT. SURYAPRABHA JATISATYA Mega Depo Sidoarjo, Jatim</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_45" model="res.partner">
+         <field name="DestinationCode">DSUR0004</field>
+         <field name="name">SJ SURABAYA</field>
+         <field name="city">SURABAYA</field>
+         <field name="street">PT. SURYAPRABHA JATISATYA
+Komp. Pergudangan Manukan 
+Jl. Manukan Kulon 60B SURABAYAPT. SURYAPRABHA JATISATYA
+Komp. Pergudangan Manukan 
+Jl. Manukan Kulon 60B SURABAYA</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_46" model="res.partner">
+         <field name="DestinationCode">DSUR0005</field>
+         <field name="name">SJ Tangerang</field>
+         <field name="city">Tangerang</field>
+         <field name="street">PT. SURYAPRABHA JATISATYA
+Jl. Kapuk kamal raya
+Komp. Pergudangan Rawa MelatiPT. SURYAPRABHA JATISATYA
+Jl. Kapuk kamal raya
+Komp. Pergudangan Rawa Melati</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_47" model="res.partner">
+         <field name="DestinationCode">DSKS0001</field>
+         <field name="name">SKS Jakarta</field>
+         <field name="city">Jakarta</field>
+         <field name="street">PT SINAR KAPUAS SEJAHTERA
+RUKAN MAHKOTA ANCOL BLOK D
+No. 18-19 Jl. R E Martadi
+Jakarta UtaraPT SINAR KAPUAS SEJAHTERA
+RUKAN MAHKOTA ANCOL BLOK D
+No. 18-19 Jl. R E Martadi
+Jakarta Utara</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_48" model="res.partner">
+         <field name="DestinationCode">DSMB0001</field>
+         <field name="name">SMB BEKASI</field>
+         <field name="city">BEKASI</field>
+         <field name="street">PT. SURYA MANDIRI BANGUNSINDO
+Jl. Ir. H. Juanda No. 68 RT 004/06 MARGAJAYA BEKASI</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+      <record id="master_destination_id_49" model="res.partner">
+         <field name="DestinationCode">DTMB0001</field>
+         <field name="name">TMB BALI</field>
+         <field name="city">BALI</field>
+         <field name="street">PT. TRI MITRA BERSAUDARA
+Jl. Raya Sesetan 221 E
+DENPASAR</field>
+         <field name="parent_id" ref="custom_work_order.master_origin"/>
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_Lixil_Project_Id"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_Lixil_Project"/>
+      </record>
+
+      <!--- MASTER SUPPLIER  TAGS -->
+
+      <record id="master_suplier_tag_1" model="res.partner.category">
+         <field name="name">Multilink</field>
+         <field name="active">true</field> 
+     </record>
+
+        <record id="master_suplier_tag_2" model="res.partner.category">
+         <field name="name">Mastiga</field>
+         <field name="active">true</field> 
+		</record>
+
+      <record id="master_suplier_tag_3" model="res.partner.category">
+         <field name="name">MNJ</field>
+         <field name="active">true</field> 
+	</record>
+
+      <!-- MASTER SUPPLIER -->
+
+      <record id="master_suplier_1" model="res.partner">
+         <field name="DestinationCode">SMTI0001</field>
+         <field name="name">PT. Multilink Trans Indonesia </field>
+         <field name="city">Bekasi</field>
+         <field name="street">Jl Pemuda No. 12 RT. 002 RW. 014 Kel. Kranji Kec. Bekasi Barat</field>
+         <field name="phone">+622189453025</field>
+        
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_MTS_Multilink"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_MTS_Multilink"/>
+      </record>
+
+       <record id="master_suplier_2" model="res.partner">
+         <field name="DestinationCode">SMAS0001</field>
+         <field name="name">PT. Multilink Trans Indonesia </field>
+         <field name="city">Bekasi</field>
+         <field name="street">Wisma Mitra Sunter 9-06 Boulevard Rya Blok C-2, Jl. Yos Sudarso Kav.89 Sunter - Jakarta Utara 14350</field>
+         <field name="phone">+62216514879</field>
+      
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_MAS_Mastiga"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_MAS_Mastiga"/>
+      </record>
+
+   <record id="master_suplier_2" model="res.partner">
+         <field name="DestinationCode">SMAS0001</field>
+         <field name="name">PT. Mandiri Nusa Jaya</field>
+       
+         <field name="phone">+62216514879</field>
+       
+         <field name="property_account_receivable" ref="custom_work_order.Debtors_MNJ_Mandiri"/>
+         <field name="property_account_payable" ref="custom_work_order.Creditors_MNJ_Mandiri"/>
+      </record>
+<!-- Master Vehicle -->
+      <record id="master_brand_vehicle_truck" model="fleet.vehicle.model.brand">
+      	<field name="name">Truck</field>
+      </record>
+      
+      <record id="master_brand_vehicle_motorCycle" model="fleet.vehicle.model.brand">
+      	<field name="name">Motorcycle</field>
+      </record>
+
+      <record id="master_brand_vehicle_motorCycle_model" model="fleet.vehicle.model">
+      	<field name="modelname">Motorcycle</field>
+      	<field name="brand_id" ref="custom_work_order.master_brand_vehicle_motorCycle"/>
+      </record>
+	
+	<record id="master_brand_vehicle_Truck_model" model="fleet.vehicle.model">
+      	<field name="modelname">Truck</field>
+      	<field name="brand_id" ref="custom_work_order.master_brand_vehicle_truck"/>
+      </record>
+
+
+      <record id="master_vehicle_1" model="fleet.vehicle">
+      	<field name="license_plate">Motorcycle</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_motorCycle_model" />
+      
+      </record>
+
+      <record id="master_vehicle_2" model="fleet.vehicle">
+      	<field name="license_plate">L300</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      
+      	<field name="WeightVehicles">1000</field>
+      	<field name="VolumeVehicles">5</field> 
+      </record>
+
+      <record id="master_vehicle_3" model="fleet.vehicle">
+      	<field name="license_plate">Pick up</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      
+      	<field name="WeightVehicles">1000</field>
+      	<field name="VolumeVehicles">5</field> 
+      </record>
+
+   <record id="master_vehicle_4" model="fleet.vehicle">
+      	<field name="license_plate">CDE</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      
+      	<field name="WeightVehicles">2000</field>
+      	<field name="VolumeVehicles">7</field> 
+      </record>
+
+       <record id="master_vehicle_5" model="fleet.vehicle">
+      	<field name="license_plate">CDD</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      
+      	<field name="WeightVehicles">4000</field>
+      	<field name="VolumeVehicles">12</field> 
+      </record>
+   <record id="master_vehicle_6" model="fleet.vehicle">
+      	<field name="license_plate">CDD BOX</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      
+      	<field name="WeightVehicles">4000</field>
+      	<field name="VolumeVehicles">12</field> 
+      </record>
+         <record id="master_vehicle_7" model="fleet.vehicle">
+      	<field name="license_plate">CDD Long Box</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      
+      	<field name="WeightVehicles">5000</field>
+      	<field name="VolumeVehicles">16</field> 
+      </record>
+      <record id="master_vehicle_8" model="fleet.vehicle">
+      	<field name="license_plate">Fuso</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      
+      	<field name="WeightVehicles">7000</field>
+      	<field name="VolumeVehicles">25</field> 
+      </record>
+       <record id="master_vehicle_9" model="fleet.vehicle">
+      	<field name="license_plate">Tronton</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      
+      	<field name="WeightVehicles">10000</field>
+      	<field name="VolumeVehicles">31</field> 
+      </record>
+       <record id="master_vehicle_10" model="fleet.vehicle">
+      	<field name="license_plate">Wingbox</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      
+      	<field name="WeightVehicles">14000</field>
+      	<field name="VolumeVehicles">45</field> 
+      </record>
+
+      <record id="master_vehicle_11" model="fleet.vehicle">
+      	<field name="license_plate">Wingbox High Jube</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      	
+      	<field name="WeightVehicles">18000</field>
+      	<field name="VolumeVehicles">60</field> 
+      </record>
+      <record id="master_vehicle_12" model="fleet.vehicle">
+      	<field name="license_plate">Wingbox Jumbo</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      
+      	<field name="WeightVehicles">36000</field>
+      	<field name="VolumeVehicles">72</field> 
+      </record>
+      <record id="master_vehicle_13" model="fleet.vehicle">
+      	<field name="license_plate">Container 20 ft</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      	
+      	<field name="WeightVehicles">18000</field>
+      	<field name="VolumeVehicles">27</field> 
+      </record>
+       <record id="master_vehicle_14" model="fleet.vehicle">
+      	<field name="license_plate">Container 40 ft</field>
+      	<field name="model_id" ref="custom_work_order.master_brand_vehicle_Truck_model" />
+      	
+      	<field name="WeightVehicles">25000</field>
+      	<field name="VolumeVehicles">50</field> 
+      </record>
+      <!-- Master Product -->
+      <record id="master_unit_of_measure_trip" model="product.uom">
+      	<field name="name">Trip</field>
+      	<field name="category_id" ref="product.uom_categ_length"/>
+      	<field name="uom_type" >reference</field>
+      	<field name="active">true</field>
+      	<field name="rounding">0.01000</field>
+      </record>
+
+      <record id="master_product_attribute_vehicle_id" model="product.attribute">
+      	<field name="name">VEHICLE TYPE</field>
+      </record>
+
+      <record id="master_product2" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE WEST JAVA</field>
+         <field name="sale_ok">true</field>
+         <field name="purchase_ok"/>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">PU,CD,CDB,CDB LONG,FUSO,THRONTON,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">BANDUNG,CIANJUR,CIREBON,GARUT,SUKABUMI,TASIKMALAYA</field>
+      </record>
+      <record id="master_product3" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE JABODETABEK</field>
+         <field name="sale_ok">true</field>
+         <field name="purchase_ok"/>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">PU,CD,CDB,CDB LONG,FUSO,THRONTON,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">BEKASI,BOGOR,DKI JAKARTA,SERANG BANTEN,TANGERANG</field>
+      </record>
+      <record id="master_product4" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE CENTRAL JAVA</field>
+         <field name="sale_ok">true</field>
+         <field name="purchase_ok"/>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">PU,CD,FUSO,THRONTON,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">YOGYAKARTA,KUDUS,PURWOKERTO,SEMARANG,SOLO,TEGAL</field>
+      </record>
+      <record id="master_product5" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE EAST JAVA</field>
+         <field name="sale_ok">true</field>
+         <field name="purchase_ok"/>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">PU,CD,FUSO,THRONTON,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">GRESIK,JEMBER,KEDIRI,MALANG,SURABAYA</field>
+      </record>
+      <record id="master_product6" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE EAST INDO</field>
+         <field name="sale_ok">true</field>
+         <field name="purchase_ok"/>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">PU,CD,CDB,CDB LONG,FUSO,THRONTON,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">DENPASAR,LOMBOK</field>
+      </record>
+      <record id="master_product7" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE KALIMANTAN</field>
+         <field name="sale_ok">true</field>
+         <field name="purchase_ok"/>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">CON20,CON40,CON40 HC</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">BALIKPAPAN,BANJARMASIN,PONTIANAK,SAMARINDA</field>
+      </record>
+      <record id="master_product8" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE MALUKU</field>
+         <field name="sale_ok">true</field>
+         <field name="purchase_ok"/>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">CON20,CON40,CON40 HC</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">AMBON</field>
+      </record>
+      <record id="master_product9" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE SULAWESI</field>
+         <field name="sale_ok">true</field>
+         <field name="purchase_ok"/>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">CON20,CON40,CON40 HC</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">KENDARI,MAKASAR,MANADO,PALU</field>
+      </record>
+      <record id="master_product10" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE SUMATERA</field>
+         <field name="sale_ok">true</field>
+         <field name="purchase_ok"/>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">CD,FUSO,THRONTON,CON20,CON40,CON40 HC</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">BATAM,BENGKULU,JAMBI,LAMPUNG,MEDAN,PADANG,PALEMBANG ,PANGKAL PINANG,PEKANBARU,TANJUNG PINANG</field>
+      </record>
+      <record id="master_product11" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE WEST JAVA MASTIGA</field>
+         
+         <field name="purchase_ok">true</field>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">CDB,CDB LONG,FUSO,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">BANDUNG,CIANJUR,CIREBON,GARUT,SUKABUMI,TASIKMALAYA</field>
+      </record>
+      <record id="master_product12" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE JABODETABEK MASTIGA</field>
+         
+         <field name="purchase_ok">true</field>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">CDB,CDB LONG,FUSO,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">BEKASI,BOGOR,DKI JAKARTA,SERANG BANTEN,TANGERANG</field>
+      </record>
+      <record id="master_product13" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE CENTRAL JAVA MASTIGA</field>
+         
+         <field name="purchase_ok">true</field>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">CDB,CDB LONG,FUSO,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">YOGYAKARTA,KUDUS,PURWOKERTO,SEMARANG,SOLO,TEGAL</field>
+      </record>
+      <record id="master_product14" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE EAST JAVA MASTIGA</field>
+         
+         <field name="purchase_ok">true</field>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">CDB,CDB LONG,FUSO,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">GRESIK,JEMBER,KEDIRI,MALANG,SURABAYA</field>
+      </record>
+      <record id="master_product15" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE EAST INDO MASTIGA</field>
+         
+         <field name="purchase_ok">true</field>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">FUSO</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">DENPASAR</field>
+      </record>
+      <record id="master_product16" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE WEST JAVA MULTILINK</field>
+         
+         <field name="purchase_ok">true</field>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">PU,CD,CDB,CDB LONG,FUSO,THRONTON,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">BANDUNG,CIANJUR,CIREBON,GARUT,SUKABUMI,TASIKMALAYA</field>
+      </record>
+      <record id="master_product17" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE JABODETABEK MULTILINK</field>
+         
+         <field name="purchase_ok">true</field>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">PU,CD,CDB,CDB LONG,FUSO,THRONTON,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">BEKASI,BOGOR,DKI JAKARTA,SERANG BANTEN,TANGERANG</field>
+      </record>
+      <record id="master_product18" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE CENTRAL JAVA MULTILINK</field>
+         
+         <field name="purchase_ok">true</field>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">PU,CD,CDB,CDB LONG,FUSO,THRONTON,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">YOGYAKARTA,KUDUS,PURWOKERTO,SEMARANG,SOLO,TEGAL</field>
+      </record>
+      <record id="master_product19" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE EAST JAVA MULTILINK</field>
+         
+         <field name="purchase_ok">true</field>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">PU,CD,CDB,CDB LONG,FUSO,THRONTON,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">GRESIK,JEMBER,KEDIRI,MALANG,SURABAYA</field>
+      </record>
+      <record id="master_product20" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE EAST INDO MULTILINK</field>
+         
+         <field name="purchase_ok">true</field>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">PU,CD,CDB,CDB LONG,FUSO,THRONTON,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">DENPASAR,LOMBOK</field>
+      </record>
+      <record id="master_product21" model="product.template">
+         <field name="name">DEDICATED TRIP SERVICES BASE SUMATERA MULTILINK</field>
+         
+         <field name="purchase_ok">true</field>
+         <field name="type">service</field>
+         <field name="uom_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="uom_po_id" ref="custom_work_order.master_unit_of_measure_trip"/>
+         <field name="attribute_id" ref="custom_work_order.master_product_attribute_vehicle_id"/>
+         <field name="attribute_line_ids">PU,CD,CDB,CDB LONG,FUSO,THRONTON,WINGBOX</field>
+         <field name="attribute_id">CITY</field>
+         <field name="value_ids">BENGKULU,JAMBI,LAMPUNG,MEDAN,PALEMBANG</field>
+      </record>
+
+     </data>
+</openerp>
