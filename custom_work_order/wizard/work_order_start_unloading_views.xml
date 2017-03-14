@@ -11,12 +11,12 @@
     <field name="arch" type="xml">
         <form string="Unloading">
             <group name="group_1" colspan="4" col="2">
-                <field name="date_arrive"/>
+                <field name="date_unloading"/>
             </group>
             <footer>
                 <button name="button_unloading"
                         type="object"
-                        string="Arrive"
+                        string="Unloading"
                         class="oe_highlight"/>
                 or
                 <button special="cancel"

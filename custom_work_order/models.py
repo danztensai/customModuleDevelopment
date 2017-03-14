@@ -136,7 +136,7 @@ class add_new_field(models.Model):
     @api.multi
     def button_unloading(self):
         for order in self:
-            order._action_unloading()
+            order._action_unloading(fields.Datetime.now())
         
 
     @api.multi
@@ -221,10 +221,10 @@ class add_new_field(models.Model):
         self.write(self._prepare_loading_data())
     
     @api.multi
-    def _action_unloading(self):
+    def _action_unloading(self,date_unloading=fields.Datetime.now()):
         self.ensure_one()
 
-        self.write(self._prepare_unloading_data())
+        self.write(self._prepare_unloading_data(date_unloading))
 
     @api.multi
     def _action_finish(self):
@@ -276,11 +276,11 @@ class add_new_field(models.Model):
         }
     
     @api.multi
-    def _prepare_unloading_data(self):
+    def _prepare_unloading_data(self,date_unloading):
         self.ensure_one()
 
         return {'state':'unloading',
-            'StartUnloading': datetime.datetime.now(),
+            'StartUnloading': date_unloading,
         }
 
     @api.multi

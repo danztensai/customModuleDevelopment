@@ -9,7 +9,7 @@ class WorkOrderUnloading(models.TransientModel):
     _name = "fleet.work.order.unloading"
     _description = "Work Order Unloading"
 
-    date_arrive = fields.Datetime(
+    date_unloading = fields.Datetime(
         string="Date Arrive",
         required=True,
         default=fields.Datetime.now(),
@@ -18,12 +18,12 @@ class WorkOrderUnloading(models.TransientModel):
     @api.multi
     def button_unloading(self):
         self.ensure_one()
-        self._arrive()
+        self._unloading()
 
     @api.multi
-    def _arrive(self):
+    def _unloading(self):
         self.ensure_one()
         order_ids = self.env.context["active_ids"]
         order = self.env["fleet.work.order"].browse(order_ids)
 
-        order._action_unloading(date_arrive=self.date_arrive)
+        order._action_unloading(date_unloading=self.date_unloading)
