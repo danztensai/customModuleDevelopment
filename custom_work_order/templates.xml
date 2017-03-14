@@ -32,10 +32,12 @@
 				</xpath>
 				-->
 				<xpath expr="//group[@name='group_1']//field[@name='partner_id']" position="after">
+				<field name="deliveryNoteNo" invisible="1" />
 				<field name="DestinationCode" />
 				<field name="WeightVehicles" on_change="on_change_weight(WeightVehicles,WeightVehiclesRelated)" />
 				<field name="VolumeVehicles"  />
 				 <field name="attachment_ids" widget="many2many_binary" string="Attach a file"/>
+
 				</xpath>
 				<xpath expr="//group[@name='group_1']//field[@name='vehicle_id']" position="after">
 				<field name="licensePlate" />
@@ -79,7 +81,7 @@
             <field name="model">fleet.work.order</field>
             <field name="inherit_id" ref="fleet_work_order_multiple_route.fleet_work_order_view_form"/>
 			<field name="arch" type="xml">
-<xpath expr="//tree[@string='Routes']//field[@name='name']" position="after">
+		<xpath expr="//tree[@string='Routes']//field[@name='name']" position="after">
 					<field name="Arrival" />
 					<field name="ArrivalPlan" />
 					<field name="DepartFromDestination" />

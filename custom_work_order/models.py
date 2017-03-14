@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import datetime
+from random import randint
 from openerp import models, fields, api
 
 _logger = logging.getLogger(__name__)
@@ -12,6 +13,7 @@ class add_new_field(models.Model):
     _inherit = 'fleet.work.order'
     
    
+
     sealNo = fields.Char ('Seal No')   
     orderDate = fields.Datetime('Order Date')
     LoadingPlan = fields.Datetime('Loading Plan')
@@ -22,12 +24,11 @@ class add_new_field(models.Model):
     LoadingDocFinish = fields.Datetime('Doc Finish',readonly=True)
     DispatchFromOrigin = fields.Datetime('Dispatch From Origin',readonly=True)
     ActualArrivalTime = fields.Datetime('Arrival at Destination',readonly=True)
-    StartUnloading = fields.Datetime('Start Unloading',readonly=True)
+    StartUnloading = fields.Datetime('Start Unloading')
     FinishUnloading = fields.Datetime('Finish Unloading',readonly=True)
     FinishDocLoading = fields.Datetime(String='Finish Doc Loading',readonly=True)
     DepartFromDestination = fields.Datetime(
-        string="Depart From Destination",
-        readonly=True,
+        string="Depart From Destination"
     )
     Status = fields.Selection(selection=[('pod','POD'),('halfpod','Half POD'),('cancelled','CANCELLED')],String='Status')
     partner_id = fields.Many2one(
@@ -90,7 +91,14 @@ class add_new_field(models.Model):
     itemList = fields.One2many(string="Item List",
         comodel_name="fleet.work.order.item",
         inverse_name="id")
-
+    
+  
+    deliveryNoteNo = fields.Char(
+    string='Name',
+    default=datetime.datetime.now().strftime("%Y%m%d%f"),
+    )
+    driver_id = fields.Char('Driver')
+    co_driver_id = fields.Char('Co Driver')
     
     def on_change_weight(self,cr,user,ids,WeightVehicles,WeightVehiclesRelated,context=None):
         #Calculate the total
