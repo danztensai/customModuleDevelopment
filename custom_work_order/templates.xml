@@ -14,7 +14,7 @@
 				<button name="%(fleet_work_order.work_order_depart_action)d" string="Depart" type="action" class="oe_highlight" states="loading"/>
                 <button name="%(fleet_work_order.work_order_arrive_action)d" string="Arrive" type="action" class="oe_highlight" states="depart"/>                
                 <button name="%(custom_work_order.work_order_unloading_action)d" string="Unloading" type="action" class="oe_highlight" states="arrive"/>
-				<button name="button_finish" string="Finish" type="object" class="oe_highlight" states="unloading"/>
+				<button name="%(custom_work_order.work_order_finish_action)d" string="Finish" type="action" class="oe_highlight" states="unloading"/>
 				
 				<button name="button_cancel" string="Cancel" type="object" states="draft,confirmed,loading,depart,arrive,unloading,finish,exception,cancelled"/>
 				<button name="button_exception" string="Exception" type="object" states="draft,confirmed,loading,depart,arrive,unloading,finish,exception,cancelled"/>

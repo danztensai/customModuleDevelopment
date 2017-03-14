@@ -30,7 +30,7 @@ Remark
     # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
     # for the full list
     'category': 'Uncategorized',
-    'version': '0.1',
+    'version': '2.1',
 
     # any module necessary for this one to work correctly
     'depends': ['fleet_work_order','fleet_work_order_multiple_route'],
@@ -38,7 +38,13 @@ Remark
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'templates.xml','report.xml','report_delivery_note.xml','wizard/work_order_start_unloading_views.xml'
+        'wizard/work_order_start_unloading_views.xml',
+        'wizard/work_order_finish_views.xml',
+        'templates.xml',
+        'report.xml',
+        'report_delivery_note.xml',
+        'data/master_data_company.xml',
+
     ],
     # only loaded in demonstration mode
     'demo': [

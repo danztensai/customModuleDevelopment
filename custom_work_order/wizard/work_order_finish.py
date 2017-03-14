@@ -5,30 +5,25 @@
 from openerp import api, models, fields
 
 
-class WorkOrderDepart(models.TransientModel):
-    _name = "fleet.work.order.depart"
-    _description = "Work Order Arrive"
+class WorkOrderFinish(models.TransientModel):
+    _name = "fleet.work.order.finish"
+    _description = "Work Order Finish"
 
-    date_depart = fields.Datetime(
-        string="Date Depart",
+    date_finish = fields.Datetime(
+        string="Date Finish",
         required=True,
         default=fields.Datetime.now(),
     )
-    start_odometer = fields.Float(
-        string="Starting Odometer",
-        required=True,
-    )
 
     @api.multi
-    def button_depart(self):
+    def button_finish(self):
         self.ensure_one()
-        self._depart()
+        self._finish()
 
     @api.multi
-    def _depart(self):
+    def _finish(self):
         order_ids = self.env.context["active_ids"]
         order = self.env["fleet.work.order"].browse(order_ids)
 
-        order._action_depart(date_depart=self.date_depart,
-                             starting_odometer=self.start_odometer,
+        order._action_finish(date_finish=self.date_finish,
                              )

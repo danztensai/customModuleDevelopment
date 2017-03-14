@@ -92,11 +92,9 @@ class add_new_field(models.Model):
         comodel_name="fleet.work.order.item",
         inverse_name="id")
     
-  
-    deliveryNoteNo = fields.Char(
-    string='Name',
-    default=datetime.datetime.now().strftime("%Y%m%d%f"),
-    )
+
+    deliveryNoteNo = fields.Char(string='Name',
+    default=datetime.datetime.now().strftime("%Y%m%d%f"),)
     driver_id = fields.Char('Driver')
     co_driver_id = fields.Char('Co Driver')
     
@@ -142,7 +140,7 @@ class add_new_field(models.Model):
     @api.multi
     def button_finish(self):
         for order in self:
-            order._action_finish()
+            order._action_finish(fields.Datetime.now())
 
     @api.one
     def button_exception(self):
@@ -227,10 +225,10 @@ class add_new_field(models.Model):
         self.write(self._prepare_unloading_data(date_unloading))
 
     @api.multi
-    def _action_finish(self):
+    def _action_finish(self,date_finish=fields.Datetime.now()):
         self.ensure_one()
 
-        self.write(self._prepare_finish())
+        self.write(self._prepare_finish(date_finish))
 
 
     @api.multi
@@ -284,11 +282,11 @@ class add_new_field(models.Model):
         }
 
     @api.multi
-    def _prepare_finish(self):
+    def _prepare_finish(self,date_finish):
         self.ensure_one()
 
         return {'state':'finish',
-            'DepartFromDestination': datetime.datetime.now(),
+            'DepartFromDestination': date_finish,
         }
 
     @api.multi
