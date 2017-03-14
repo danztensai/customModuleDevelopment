@@ -8,10 +8,10 @@
 		
                 <xpath expr="//page[@string='Order Lines']//tree[@string='Sales Order Lines']//field[@name='product_uos']" position="after">
                 <field name="Destination"/>
-				<field name="DeliveryOrder" />
-				<field name="Vehicle" />
+				<field name="DeliveryOrder"  />
+				<field name="Vehicle_id" options="{'no_create': True}"/>
                 <field name="DeliveryDate" />
-                <field name="DeliveryNumber" />
+                <field name="DeliveryNumber_id" options="{'no_create': True}" />
 		</xpath>
             </field>
         </record>
@@ -24,9 +24,9 @@
                 <xpath expr="//tree[@string='Invoice Lines']//field[@name='account_analytic_id']" position="after">
                 <field name="Destination"/>
 				<field name="DeliveryOrder" />
-				<field name="Vehicle" />
+				<field name="Vehicle_id" />
                 <field name="DeliveryDate" />
-                <field name="DeliveryNumber" />
+                <field name="DeliveryNumber_id" />
 		</xpath>
             </field>
         </record>
