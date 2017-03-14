@@ -44,6 +44,8 @@ class add_new_field(models.Model):
     attachment_ids = fields.Many2many('ir.attachment','fleet_work_order_attachment','fleet_work_order_id_attachment',string='Attachment')
     
 
+
+
     DestinationCode = fields.Char(related='partner_id.DestinationCode',string='Destination Code')
     vehicle_id = fields.Many2one(
         string="Vehicle",
@@ -97,6 +99,8 @@ class add_new_field(models.Model):
     default=datetime.datetime.now().strftime("%Y%m%d%f"),)
     driver_id = fields.Char('Driver')
     co_driver_id = fields.Char('Co Driver')
+
+
     
     def on_change_weight(self,cr,user,ids,WeightVehicles,WeightVehiclesRelated,context=None):
         #Calculate the total

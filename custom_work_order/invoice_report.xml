@@ -1,9 +1,19 @@
+<?xml version="1.0"?>
 <openerp>
-    <data>
-        <!-- Inherit quotation report (from module sale) -->
-        <template id="report_quotation_inherit_demo" inherit_id="sale.report_saleorder_document">
-            <xpath expr="//div[@class='page']" position="replace">
-            <div class="page">
+	<data>
+		<report id="account_invoices"
+			string="Detailed Invoice Report"
+			model="account.invoice"
+			file="account.report_invoice"
+			report_type="qweb-pdf"
+			name="custom_work_order.custom_invoice_report"
+			attachment_use="True"
+			/>
+			<template id="custom_invoice_report">
+					<t t-call="report.html_container">
+					<t t-foreach="docs" t-as="o">
+					<t t-call="report.external_layout">
+					 <div class="page">
             <div class="row">
                 <div class="col-xs-5 col-xs-offset-7">
                     <address t-field="o.partner_id"
@@ -46,11 +56,16 @@
                 </div>
             </div>
 
-            <table class="table table-condensed">
+            <table class="table table-condensed" style="background-color:lightgray;">
                 <thead>
                     <tr>
                         <th>Description</th>
                         <th>Quantity</th>
+                        <th>Destination</th>
+                        <th>Delivery Order</th>
+                        <th>Vehicle</th>
+                        <th>Delivery Date</th>
+                        <th>Delivery Order No</th>
                         <th class="text-right">Unit Price</th>
                         <th class="text-right" groups="sale.group_discount_per_so_line">Discount (%)</th>
                         <th class="text-right">Taxes</th>
@@ -64,6 +79,22 @@
                             <span t-field="l.quantity"/>
                             <span t-field="l.uos_id"  groups="product.group_uom"/>
                         </td>
+                        <td >
+                        	<span t-field="l.Destination"/>
+                        </td>
+                        <td >
+                        	<span t-field="l.DeliveryOrder"/>
+                        </td>
+                          <td >
+                        	<span t-field="l.Vehicle_id"/>
+                        </td>
+                        <td >
+                        	<span t-field="l.DeliveryDate"/>
+                        </td>
+                        <td >
+                        	<span t-field="l.DeliveryNumber_id"/>
+                        </td>
+                    
                         <td class="text-right">
                             <span t-field="l.price_unit"/>
                         </td>
@@ -88,12 +119,22 @@
                                 <span t-field="o.amount_untaxed" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
                             </td>
                         </tr>
+                          <span t-if="o.tax_line">
+                        	<tr t-foreach="o.tax_line" t-as="t">
+                                <td><span t-field="t.name"/></td>
+                                <td class="text-right">
+                                    <span t-field="t.amount"
+                                        t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                </td>
+                            </tr>
+                        </span>
                         <tr>
                             <td>Taxes</td>
                             <td class="text-right">
                                 <span t-field="o.amount_tax" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
                             </td>
                         </tr>
+                      
                         <tr class="border-black">
                             <td><strong>Total</strong></td>
                             <td class="text-right">
@@ -104,32 +145,7 @@
                 </div>
             </div>
 
-            <div class="row" t-if="o.tax_line">
-                <div class="col-xs-6">
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <th>Tax</th>
-                                <th class="text-right">Base</th>
-                                <th class="text-right">Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr t-foreach="o.tax_line" t-as="t">
-                                <td><span t-field="t.name"/></td>
-                                <td class="text-right">
-                                    <span t-field="t.base"
-                                        t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
-                                </td>
-                                <td class="text-right">
-                                    <span t-field="t.amount"
-                                        t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            
 
             <p t-if="o.comment">
                 <strong>Comment:</strong>
@@ -145,7 +161,9 @@
             </p>
         </div>
 
-            </xpath>
-        </template>
-    </data>
+					</t>
+					</t>
+					</t>
+			</template>
+	</data>
 </openerp>

@@ -15,13 +15,15 @@
 					<!-- Report page content -->
 					 <h2>Work Order  <span t-field="o.name"/></h2>
 
- <div class="row">
+ 					<div class="row">
 						<div class="col-xs-6">
 						<h3>Order Information</h3>
 							<dl class="dl-horizontal">
 
 								<dt>Delivery Note No</dt>
 								<dd><span t-field="o.deliveryNoteNo"/></dd>
+								<dt>Seal No </dt>
+								<dd><span t-field="o.sealNo"/></dd>
 
 								<dt>Order No</dt>
 								<dd><span t-field="o.name"/></dd>
@@ -56,8 +58,11 @@
 					
 					<div class="row">
 						<div class="form-group">
-					      <label for="comment">Comment:</label>
-					      <textarea class="form-control" rows="5" id="comment"></textarea>
+					      <label for="comment">Product Details</label>
+					      <textarea class="form-control" rows="5" id="comment">
+					      	
+					      	<span t-field="o.note"/>
+					      </textarea>
 					     
 					    </div>
 					  <div class="form-group">
