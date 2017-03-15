@@ -95,7 +95,7 @@ class add_new_field(models.Model):
         inverse_name="id")
     
 
-    deliveryNoteNo = fields.Char(string='Name',
+    deliveryNoteNo = fields.Char(string='DeliveryNo',
     default=datetime.datetime.now().strftime("%Y%m%d%f"),)
     driver_id = fields.Char('Driver')
     co_driver_id = fields.Char('Co Driver')
