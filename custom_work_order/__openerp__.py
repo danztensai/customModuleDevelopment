@@ -45,6 +45,7 @@ Remark
         'report_delivery_note.xml',
         'sequence.xml',
         'invoice_report.xml',
+        #'data/master_data_company.xml',
 
     ],
     # only loaded in demonstration mode
