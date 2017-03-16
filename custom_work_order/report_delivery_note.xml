@@ -29,7 +29,8 @@
 								<dd><span t-field="o.name"/></dd>
 						
 								<dt>Partner</dt>
-								<dd><span t-field="o.partner_id"/></dd>
+								<dd><address t-field="o.partner_id"
+                        t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' /></dd>
 								<dt>Destination Code</dt>
 								<dd><span t-field="o.DestinationCode"/></dd>
 								
@@ -47,7 +48,10 @@
 								<dd><span t-field="o.vehicle_id"/></dd>
 								<dt>License Plate</dt>
 								<dd><span t-field="o.licensePlate"/></dd>
-								
+								<dt>Consignee</dt>
+								<br/>
+								<br/>
+								<dd>-------------------------------</dd>
 								
 							</dl>
 						

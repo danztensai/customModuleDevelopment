@@ -56,7 +56,7 @@
             		<field name="LoadingPlan" />
 						<field name="SPM"/>
 						
-						
+						<field name="deliveryNoteNo"/>
 						<field name="StartLoading"/>
 						<field name="FinishLoading"/>					
 						<field name="LoadingDocFinish"/>

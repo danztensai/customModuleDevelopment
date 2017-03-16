@@ -94,13 +94,26 @@ class add_new_field(models.Model):
         comodel_name="fleet.work.order.item",
         inverse_name="id")
     
+    def _get_code(self, cr, uid,context, *args):
+        obj_sequence = self.pool.get('ir.sequence')    
+        return obj_sequence.next_by_code(cr, uid, 'sequence_code', context=context)
 
-    deliveryNoteNo = fields.Char(string='DeliveryNo',
-    default=datetime.datetime.now().strftime("%Y%m%d%f"),)
+   
     driver_id = fields.Char('Driver')
     co_driver_id = fields.Char('Co Driver')
+    deliveryNoteNo = fields.Char(string='Delivery',readonly=True)
+    _defaults = { 'deliveryNoteNo': _get_code, }
+    
 
 
+    def _get_code(self, cr, uid,context, *args):
+        obj_sequence = self.pool.get('ir.sequence')    
+        return obj_sequence.next_by_code(cr, uid, 'sequence_code', context=context)
+
+    @api.model
+    def _get_default_name(self):
+        
+        return "Deliv"+"/"+datetime.datetime.now().strftime("%Y%m%d%f")
     
     def on_change_weight(self,cr,user,ids,WeightVehicles,WeightVehiclesRelated,context=None):
         #Calculate the total
