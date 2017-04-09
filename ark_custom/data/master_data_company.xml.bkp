@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<openerp>
+  <data noupdate="1">
+    <record id="product_attribute_1" model="product.attribute">
+      <field name="name">Origin</field>
+    </record>
+    <record id="product_attribute_value_1" model="product.attribute.value">
+      <field name="name">JAWA BARAT,KOTA BANDUNG</field>
+      <field name="attribute_id" ref="product_attribute_1"/>
+    </record>
+    <record id="product_product_1" model="product.product">
+      <field name="name">Standard - Dest :NANGGROE ACEH DARUSSALAM (NAD),KAB. ACEH BARAT,KAB. ACEH BARAT OTHERS</field>
+      <field name="standard_price">50000</field>
+      <field name="type">service</field>
+      <field name="description_sale">Standard - Dest :NANGGROE ACEH DARUSSALAM (NAD),KAB. ACEH BARAT,KAB. ACEH BARAT OTHERS</field>
+      <field eval="[(6,0,[ref('ark_custom.product_attribute_value_1')])]" name="attribute_value_ids"/>
+    </record>
+    <record id="product_attribute_line_1" model="product.attribute.line">
+      <field eval="[(6,0,[ref('ark_custom.product_attribute_value_1')])]" name="value_ids"/>
+      <field name="attribute_id" ref="product_attribute_1"/>
+      <field name="product_tmpl_id" ref="product_product_1_product_template"/>
+    </record>
+    <record id="product_product_1_product_template" model="product.template">
+      <field eval="[(6,0,[ref('ark_custom.product_attribute_line_1')])]" name="attribute_line_ids"/>
+    </record>
+  </data>
+</openerp>
