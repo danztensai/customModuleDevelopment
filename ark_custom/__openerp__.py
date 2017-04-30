@@ -22,7 +22,8 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'data/master_data_company.xml'
+        #'data/master_data_company.xml'
+		'form_Customer_view.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
