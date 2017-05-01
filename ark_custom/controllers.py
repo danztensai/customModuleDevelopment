@@ -22,6 +22,7 @@ class Main(http.Controller):
 			_logger.info(args)
 			usernameFromJson = args.get('username',False)
 			passwordFromJson = args.get('password',False)
+			database = args.get('database',False)
 			noWayBill = args.get('noWayBill')
 			interntalRef = args.get('internalRefOID',False)
 			serviceType = args.get('serviceType',False)
@@ -38,7 +39,7 @@ class Main(http.Controller):
 			
 			#Connect to ODOO XMLRPC
 			url = 'http://localhost:8069'
-			db = 'test' 
+			db = database
 			username = usernameFromJson
 			password = passwordFromJson
 			
