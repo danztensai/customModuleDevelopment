@@ -12,4 +12,11 @@ class add_new_field_res_partner(models.Model):
 class modifyProductCategry(models.Model):
 	_inherit = 'product.category'
 	complete_name = fields.Char('Category Name',store=True,select_level=1)
+	
+class modifySaleOrder(models.Model):
+	_inherit = 'sale.order'
+	noWaybill = fields.Char('No WayBill')
+	
+
+	
 

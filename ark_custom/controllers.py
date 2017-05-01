@@ -196,20 +196,22 @@ class Main(http.Controller):
 			models.execute_kw(db,uid,password,'product.template','write',[[idProduct],{'active':True}])
 			
 			
+			
 			#_logger.info(recordResult)
 				
 			price = 0
 			description = 'Pengiriman Dari '+str(cityOrigin)+' Ke '+str(cityDestination)+' Dengan Tipe '+str(serviceType)
 			_logger.info(description)
 		
-			recordPriceList = request.env['product.pricelist'].sudo().search([('name','ilike','Tiputipu'),('active','=',True)])
+			recordPriceList = request.env['product.pricelist'].sudo().search([('name','ilike',customerName),('active','=',True)])
 			_logger.info(recordPriceList.read([]))
-			idPriceListVersion = int(recordPriceList['version_id'])
+			idPriceListVersion = int(recordPriceList['version_id'][0])
+			_logger.info(idPriceListVersion)
 			
 			
 			recordPriceVersion = request.env['product.pricelist.version'].sudo().search([('id','=',idPriceListVersion)])
 			_logger.info(recordPriceVersion.read([]))
-			idPriceListItem = int(recordPriceVersion['items_id'])
+			idPriceListItem = int(recordPriceVersion['items_id'][0])
 			
 			recordProductCategoryServiceType = request.env['product.category'].sudo().search([('name','ilike',serviceType)])
 			_logger.info(recordProductCategoryServiceType.read([]))
@@ -220,6 +222,7 @@ class Main(http.Controller):
 			_logger.info(recordProductCategoryDestination.read([]))
 			idCategoryDestination=int(recordProductCategoryDestination['id'])
 			_logger.info(idCategoryDestination)
+			
 			
 			recordPriceVersionItem = request.env['product.pricelist.item'].sudo().search([('categ_id','=',idCategoryDestination)])
 			_logger.info(recordPriceVersionItem.read([]))
