@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2015 Therp BV <http://therp.nl>
+# Â© 2015 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 # import email
 # import datetime
@@ -27,7 +27,11 @@ class Main(http.Controller):
 			interntalRef = args.get('internalRefOID',False)
 			serviceType = args.get('serviceType',False)
 			cityDestination = args.get('cityDestination',False)
+			provinceDestination = args.get('provinceDestination',False)
+			districtDestination = args.get('districtDestination',False)
 			cityOrigin = args.get('cityOrigin',False)	
+			provinceOrigin = args.get('provinceOrigin',False)
+			districtOrigin = args.get('districtOrigin',False)
 			
 			customer = args.get('customer')
 			customerAccountName = customer['accountName']
@@ -39,7 +43,7 @@ class Main(http.Controller):
 			
 			#Connect to ODOO XMLRPC
 			url = 'http://localhost:8069'
-			db = database
+			db = database 
 			username = usernameFromJson
 			password = passwordFromJson
 			
@@ -196,7 +200,6 @@ class Main(http.Controller):
 			models.execute_kw(db,uid,password,'product.template','write',[[idProduct],{'active':True}])
 			
 			
-			
 			#_logger.info(recordResult)
 				
 			price = 0
@@ -204,47 +207,62 @@ class Main(http.Controller):
 			_logger.info(description)
 		
 			recordPriceList = request.env['product.pricelist'].sudo().search([('name','ilike',customerName),('active','=',True)])
-			_logger.info(recordPriceList.read([]))
-			idPriceListVersion = int(recordPriceList['version_id'][0])
-			_logger.info(idPriceListVersion)
+			if recordPriceList :
+				_logger.info(recordPriceList.read([]))
+				idPriceListVersion = int(recordPriceList['version_id'])
+				_logger.info('Id Price List'+str(idPriceListVersion))
+
+				recordPriceVersion = request.env['product.pricelist.version'].sudo().search([('id','=',	)])
+				if recordPriceVersion:
+					_logger.info(recordPriceVersion.read([]))
+					_logger.info('After Record Price Version')
+					idPriceListItem = int(recordPriceVersion['items_id'][0])
+					_logger.info('id Price List Item '+str(idPriceListItem))
 			
-			
-			recordPriceVersion = request.env['product.pricelist.version'].sudo().search([('id','=',idPriceListVersion)])
-			_logger.info(recordPriceVersion.read([]))
-			idPriceListItem = int(recordPriceVersion['items_id'][0])
-			
-			recordProductCategoryServiceType = request.env['product.category'].sudo().search([('name','ilike',serviceType)])
-			_logger.info(recordProductCategoryServiceType.read([]))
-			idCategoryServiceType = recordProductCategoryServiceType['id']
-			
-			
-			recordProductCategoryDestination = request.env['product.category'].sudo().search([('name','ilike',cityDestination),('parent_id','=',idCategoryServiceType)])
-			_logger.info(recordProductCategoryDestination.read([]))
-			idCategoryDestination=int(recordProductCategoryDestination['id'])
-			_logger.info(idCategoryDestination)
-			
-			
-			recordPriceVersionItem = request.env['product.pricelist.item'].sudo().search([('categ_id','=',idCategoryDestination)])
-			_logger.info(recordPriceVersionItem.read([]))
-			price = int(recordPriceVersionItem['price_surcharge'])
-			
-			
-			#_logger.info(models.execute_kw(db, uid, password,'product.pricelist', 'search_read',[[['name', 'ilike', 'gramedia'],]],{'fields': ['name', 'country_id', 'version_id'], 'limit': 5}))
+					recordProductCategoryServiceType = request.env['product.category'].sudo().search([('name','ilike',serviceType)])
+					if recordProductCategoryServiceType:
+						_logger.info(recordProductCategoryServiceType.read([]))
+						idCategoryServiceType = recordProductCategoryServiceType['id']
+					
+					
+					_logger.info('parameter cityDestination | '+cityDestination+' parent id |'+str(idCategoryServiceType))
+					recordProductCategoryDestination = request.env['product.category'].sudo().search([('name','ilike',cityDestination),('parent_id','=',idCategoryServiceType)])
+					if recordProductCategoryDestination:
+						_logger.info(recordProductCategoryDestination.read([]))
+						idCategoryDestination=int(recordProductCategoryDestination['id'])
+						_logger.info(idCategoryDestination)
+					
+						_logger.info('id Category Destination '+str(idCategoryDestination))
+						
+						_logger.info('Before RecordPriceVersionItem ')
+						recordPriceVersionItem = request.env['product.pricelist.item'].sudo().search([('categ_id','=',idCategoryDestination),('id','=',idPriceListItem)])
+					_logger.info(recordPriceVersionItem.read([]))
+					price = int(recordPriceVersionItem['price_surcharge'])
+			_logger.info('Ini Setelah Price Version Item')
+#			_logger.info(models.execute_kw(db, uid, password,'product.pricelist', 'search_read',[[['name', 'ilike', 'gramedia'],]],{'fields': ['name', 'country_id', 'version_id'], 'limit': 5}))
 			
 
 			
-		#	_logger.info(models.execute_kw(db, uid, password, 'product.attribute.line', 'name_get', [[7]]))
+#			_logger.info(models.execute_kw(db, uid, password, 'product.attribute.line', 'name_get', [[7]]))
+			#_logger.info(idProduct)
+			#_logger.info(idValueOrigins)
+			#_logger.info(idValueDestination)
 			recordsProductVariant = request.env['product.product'].sudo().search([('product_tmpl_id','=',idProduct),('attribute_value_ids','=',idValueOrigins),('attribute_value_ids','=',idValueDestination)])
+			_logger.info(recordsProductVariant.read([]))
 			idProductVariant = recordsProductVariant['id']
-			_logger.info(idProductVariant)
+			_logger.info('Id Product Variant'+str(idProductVariant))
 			
 			
-		#	idSaleOrderLine = models.execute_kw(db, uid, password, 'sale.order.line', 'create', [{'name': description,'product_id':idProduct,'product_uom_qty':1,'price_unit':price}])
+#			idSaleOrderLine = models.execute_kw(db, uid, password, 'sale.order.line', 'create', [{'name': description,'product_id':idProduct,'product_uom_qty':1,'price_unit':price}])
 			idSaleOrder = models.execute_kw(db, uid, password, 'sale.order', 'create', [{'partner_id':idCustomer,'order_line':[(0,0,{'product_id':idProductVariant,'product_uom_qty':1,'name':description,'price_unit':price})]}])
 			
-		#	_logger.info(idSaleOrder)
+			#_logger.info('Created Sale Order With Id '+str(idSaleOrder))
 			status = [{'status':'0','Description':'Success','idQuotation':idSaleOrder}]
+			
+			
 			return status
 		except Exception as e:
+			_logger.error('Something Wrong Please see Exception')
 			status = [{'status':'3','Description':e}]
 			return status
+	
