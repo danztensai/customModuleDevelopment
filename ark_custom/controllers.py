@@ -40,7 +40,7 @@ class Main(http.Controller):
 			customerAddress = customer['address']
 			customerPhone = customer['phone']
 			contactPerson = customer['contactPerson']
-			
+			salePrice = 0
 			#Connect to ODOO XMLRPC
 			url = 'http://localhost:8069'
 			db = database 
@@ -117,9 +117,11 @@ class Main(http.Controller):
 				_logger.info(recordsProductTempate.mapped('name'))
 				_logger.info('Standard Product Already in Databases')
 				arrayId = recordsProductTempate.mapped('id')
+				salePrice = recordsProductTempate['list_price']
 				for i in arrayId:
 					
 					idProduct = i
+					
 				
 			else :
 				idProduct = models.execute_kw(db, uid, password, 'product.template', 'create', [{'name': serviceType,'type':'service'}])
@@ -203,6 +205,7 @@ class Main(http.Controller):
 			#_logger.info(recordResult)
 				
 			price = 0
+			discount = 0
 			description = 'Pengiriman Dari '+str(cityOrigin)+' Ke '+str(cityDestination)+' Dengan Tipe '+str(serviceType)
 			_logger.info(description)
 		
@@ -211,33 +214,42 @@ class Main(http.Controller):
 				_logger.info(recordPriceList.read([]))
 				idPriceListVersion = int(recordPriceList['version_id'])
 				_logger.info('Id Price List'+str(idPriceListVersion))
-
-				recordPriceVersion = request.env['product.pricelist.version'].sudo().search([('id','=',	)])
+				
+				
+				recordPriceVersion = request.env['product.pricelist.version'].sudo().search([('id','=',	idPriceListVersion)])
 				if recordPriceVersion:
 					_logger.info(recordPriceVersion.read([]))
 					_logger.info('After Record Price Version')
-					idPriceListItem = int(recordPriceVersion['items_id'][0])
-					_logger.info('id Price List Item '+str(idPriceListItem))
-			
-					recordProductCategoryServiceType = request.env['product.category'].sudo().search([('name','ilike',serviceType)])
-					if recordProductCategoryServiceType:
-						_logger.info(recordProductCategoryServiceType.read([]))
-						idCategoryServiceType = recordProductCategoryServiceType['id']
+					listItemsId = recordPriceVersion['items_id']
+					for i in listItemsId:
 					
-					
-					_logger.info('parameter cityDestination | '+cityDestination+' parent id |'+str(idCategoryServiceType))
-					recordProductCategoryDestination = request.env['product.category'].sudo().search([('name','ilike',cityDestination),('parent_id','=',idCategoryServiceType)])
-					if recordProductCategoryDestination:
-						_logger.info(recordProductCategoryDestination.read([]))
-						idCategoryDestination=int(recordProductCategoryDestination['id'])
-						_logger.info(idCategoryDestination)
-					
-						_logger.info('id Category Destination '+str(idCategoryDestination))
+						idPriceListItem = i
+						_logger.info('id Price List Item '+str(idPriceListItem))	
+						recordPriceVersionItem = request.env['product.pricelist.item'].sudo().search([('id','=',int(idPriceListItem))])
+						_logger.info(recordPriceVersionItem.read([]))
+						categ = int(recordPriceVersionItem['categ_id'])
+						_logger.info(categ)
+						testRecord = request.env['product.category'].sudo().search([('id','=',categ)])
+						_logger.info(testRecord.read([]))
+						categoryName = testRecord['complete_name']
 						
-						_logger.info('Before RecordPriceVersionItem ')
-						recordPriceVersionItem = request.env['product.pricelist.item'].sudo().search([('categ_id','=',idCategoryDestination),('id','=',idPriceListItem)])
-					_logger.info(recordPriceVersionItem.read([]))
-					price = int(recordPriceVersionItem['price_surcharge'])
+						if categoryName.find(serviceType) != -1:
+							_logger.info('Yes Its Same Service Type')
+							if categoryName.find(provinceDestination) != -1:
+								_logger.info('Yes Its same province Destination')
+								if categoryName.find(cityDestination) != -1 or categoryName.find(districtDestination) != -1:
+									_logger.info('Yes Its same City')
+									itemName = str(recordPriceVersionItem['display_name'])
+									discountName = 'discount'
+									fixedAmount = 'fixed amount'
+									if itemName.lower() == fixedAmount.lower():
+										price = int(recordPriceVersionItem['price_surcharge'])
+									if itemName.lower() == discountName.lower():
+										discount = recordPriceVersionItem['price_surcharge']
+						
+			else:
+				price = salePrice
+				
 			_logger.info('Ini Setelah Price Version Item')
 #			_logger.info(models.execute_kw(db, uid, password,'product.pricelist', 'search_read',[[['name', 'ilike', 'gramedia'],]],{'fields': ['name', 'country_id', 'version_id'], 'limit': 5}))
 			
@@ -263,6 +275,7 @@ class Main(http.Controller):
 			return status
 		except Exception as e:
 			_logger.error('Something Wrong Please see Exception')
+			_logger.error(str(e))
 			status = [{'status':'3','Description':e}]
 			return status
 	
