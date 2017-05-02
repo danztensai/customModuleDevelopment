@@ -117,7 +117,8 @@ class Main(http.Controller):
 				_logger.info(recordsProductTempate.mapped('name'))
 				_logger.info('Standard Product Already in Databases')
 				arrayId = recordsProductTempate.mapped('id')
-				salePrice = recordsProductTempate['list_price']
+				salePrice = int(recordsProductTempate['list_price'])
+				_logger.info(salePrice)
 				for i in arrayId:
 					
 					idProduct = i
@@ -224,8 +225,8 @@ class Main(http.Controller):
 					for i in listItemsId:
 					
 						idPriceListItem = i
-						_logger.info('id Price List Item '+str(idPriceListItem))	
 						recordPriceVersionItem = request.env['product.pricelist.item'].sudo().search([('id','=',int(idPriceListItem))])
+						_logger.info('id Price List Item '+str(idPriceListItem))	
 						_logger.info(recordPriceVersionItem.read([]))
 						categ = int(recordPriceVersionItem['categ_id'])
 						_logger.info(categ)
@@ -246,7 +247,14 @@ class Main(http.Controller):
 										price = int(recordPriceVersionItem['price_surcharge'])
 									if itemName.lower() == discountName.lower():
 										discount = recordPriceVersionItem['price_surcharge']
-						
+								else:
+									price = salePrice
+							else:
+								price = salePrice
+						else:
+							price = salePrice
+				else:
+					price = salePrice
 			else:
 				price = salePrice
 				
